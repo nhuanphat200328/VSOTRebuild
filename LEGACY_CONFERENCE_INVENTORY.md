@@ -1,70 +1,101 @@
 # LEGACY_CONFERENCE_INVENTORY.md
 
 - Ngày kiểm kê: 2026-11-20
-- Nguồn: `PrototypeClone/public_html` (READ-ONLY)
-- Không chỉnh sửa bản gốc.
+- Nguồn: `PrototypeClone/public_html` — **READ-ONLY**
+- Tổng file trong PrototypeClone: **9.304** (không thay đổi sau cleanup).
+- Không xóa bất kỳ thư mục hội nghị hoặc tài nguyên nào.
 
-## Tổng quan
+## 1. Tất cả thư mục hội nghị tìm thấy
 
-| Năm | Thư mục | Entry | Files | Dung lượng | Công nghệ | Trạng thái migrate |
-|---:|---|---|---:|---:|---|---|
-| 2026 | `hoinghi2026` | `index.html` | 577 | 206,3 MB | Static HTML + PHP admin + JSON | **Migrated** (public-only) |
-| 2025 | `hoinghi2025` | `index.html` | 321 | 192,0 MB | Static HTML + ảnh + PDF/video | **Migrated visual** |
-| 2023 | `hoinghi2023` | PDF | 1 | 0,6 MB | PDF | **Migrated** (document) |
-| 2022 | `hoinghi2022` | `chuong-trinh-hoi-nghi-final.htm` | 20 | 14,9 MB | Word HTML + PDF/DOCX | **Content restored** |
-| 2022 | `chuongtrinhhoinghi2022` | `index.php` | 1.203 | 26,1 MB | PHP/MySQL | **Backend pending** |
-| 2021 | `chuongtrinhhoinghi2021` | `index.php` | 1.200 | 200,5 MB | PHP/MySQL | **Backend pending** |
-| 2019 | `chuongtrinhhoinghi2019` | `index.php` | 1.176 | 12,2 MB | PHP/MySQL | **Backend pending** |
-| 2018 | `chuongtrinhhoinghi2018` | `index.php` | 1.175 | 12,1 MB | PHP/MySQL | **Backend pending** |
+| Thư mục | Năm | Entry | Files | Dung lượng | Loại |
+|---|---:|---|---:|---:|---|
+| `chuongtrinhhoinghi2018` | 2018 | `index.php` | 1.175 | 12,1 MB | PHP/MySQL |
+| `chuongtrinhhoinghi2019` | 2019 | `index.php` | 1.176 | 12,2 MB | PHP/MySQL |
+| `chuongtrinhhoinghi2021` | 2021 | `index.php` | 1.200 | 200,5 MB | PHP/MySQL + slide |
+| `chuongtrinhhoinghi2022` | 2022 | `index.php` | 1.203 | 26,1 MB | PHP/MySQL (bản thứ 2 của 2022) |
+| `hoinghi2022` | 2022 | không có index | 20 | 14,9 MB | Word HTML + PDF/DOCX (bản tài liệu) |
+| `hoinghi2023` | 2023 | không có index | 1 | 0,6 MB | Chỉ PDF chương trình |
+| `hoinghi2025` | 2025 | `index.html` | 321 | 192,0 MB | Static ảnh + PDF/video |
+| `hoinghi2026` | 2026 | `index.html` | 577 | 206,3 MB | Static HTML + PHP admin + JSON |
 
-Không có thư mục website riêng cho 2020 và 2024.
+Không có thư mục website riêng cho **2020** và **2024**.
 
-## Chi tiết
+## 2. Thống kê theo loại file
 
-### 2026 — Migrated
-- Bản public: `public/legacy/2026/`.
-- Giữ 24 HTML, asset, CSS, JS, data, materials, abstracts.
-- Loại trừ `.env.local`, `admin/`, `.vercel`, `backup`, `tools`, `File tham khao`.
-- Root `/` redirect tới `/legacy/2026/index.html`.
-- Chức năng public: trang chủ, chương trình, chuyên đề, tài liệu, đăng ký, liên hệ.
-- Admin PHP không chạy trên Vercel; đây là công cụ nội bộ.
+### 2018
+- JS 421, GIF 263, PHP 163, PNG 90, HTML 82, CSS 33, ASP 20, CFM 18, PL 12, PY 10, MD 8, LASSO 7.
+- Có `admin/` + CKEditor/FCKEditor; phụ thuộc MySQL.
+- 4 file nhắc `vsot.com.vn`.
 
-### 2025 — Migrated visual
-- Bản public: `public/legacy/2025/` (index, 314 ảnh, poster, CTKH PDF rút gọn).
-- Ảnh trang chương trình tự host.
-- Các nút Google Drive vẫn là dịch vụ bên thứ ba (theo thiết kế gốc).
-- Chưa copy video trailer 27,4 MB và 2 PDF CTKH 67 MB; cần bổ sung nếu muốn đầy đủ download.
+### 2019
+- JS 421, GIF 263, PHP 164, PNG 90, HTML 82, CSS 33, ASP 20, CFM 18, PL 12, PY 10, MD 8.
+- Cấu trúc gần giống 2018.
+- 5 file nhắc `vsot.com.vn`.
 
-### 2023 — Migrated document
-- PDF: `public/archive/2023/chuong-trinh-vsot-2023.pdf`.
-- Không có website HTML.
+### 2021
+- JS 421, GIF 263, PHP 164, PNG 90, HTML 82, CSS 33, ASP 20, CFM 18, PL 12, PPTX 11, PY 10, PPT 8.
+- 200,5 MB do nhiều slide/PDF báo cáo.
+- 5 file nhắc `vsot.com.vn`.
 
-### 2022 — Content restored
-- Bản gốc `hoinghi2022/chuong-trinh-hoi-nghi-final.htm`:
-  - Word HTML, meta `charset=windows-1252`.
-  - Nhiều ký tự đã thành `?` (mất dữ liệu), không thể sửa chỉ bằng đổi charset.
-- Nguồn phục hồi: file DOCX gốc `CHƯƠNG TRÌNH TÓM TẮT ... LẦN VII.docx` (Unicode đúng).
-- Đã tạo trang mới `public/legacy/2022/index.html` từ bảng/biểu mẫu DOCX:
-  - UTF-8, font hệ thống hỗ trợ tiếng Việt.
-  - Responsive, bảng cuộn ngang.
-  - Giữ 3 bảng chương trình, 17 hàng.
-  - PDF kèm theo: `files/chuong-trinh-final.pdf`, `files/chuong-trinh-tom-tat.pdf`, `files/abstract-2022.pdf`.
-- Nội dung ngày 09–10/12/2022 lấy từ DOCX; không tự đoán chỗ thiếu.
-- Giao diện mới, không giữ layout Word gốc (được phép theo yêu cầu).
+### 2022 PHP
+- JS 421, GIF 235, PHP 164, PNG 90, HTML 82, PDF 55, CSS 33, ASP 20, CFM 18, PL 12, PY 10, MD 8.
+- 5 file nhắc `vsot.com.vn`.
+- Là bản website PHP khác với thư mục tài liệu `hoinghi2022`.
 
-### 2018 / 2019 / 2021 / 2022 PHP — Backend pending
-- Đây là ứng dụng PHP đọc MySQL, có `index.php`, `admin/`, `config.php`, tìm kiếm/phân trang.
-- Không thể chạy PHP/MySQL trực tiếp trên Vercel/Next.
-- Chưa migrate nếu không có:
-  - DB dump.
-  - PHP hosting.
-  - Hoặc snapshot HTML đầy đủ.
-- Không đưa link archive tới domain cũ cho các năm này.
-- Phương án đề xuất: PHP hosting riêng (Apache/PHP 7/8 + MySQL) hoặc rewrite sang Next/Supabase sau khi có DB.
+### 2022 tài liệu (`hoinghi2022`)
+- PDF 6, HTM 4, XML 4, DOCX 3, THMX 2, ZIP 1.
+- `chuong-trinh-hoi-nghi-final.htm`: Word HTML, meta `windows-1252`, nhiều numeric entity; một số ký tự `?` do mất dữ liệu.
+- `CHƯƠNG TRÌNH TÓM TẮT ... LẦN VII.docx`: nguồn Unicode dùng phục hồi.
+- Có bản `chuong-trinh-hoi-nghi-final.htm`, `chuong-trinh-tom-tat-2022 tp HCM.htm`, PDF/DOCX.
 
-## Dependency / rủi ro
-- Không dùng đường dẫn ổ D trong Production.
-- 2018–2022 PHP phụ thuộc DB; nếu chỉ copy source sẽ không hiển thị.
-- 2025 còn phụ thuộc Google Drive cho một số tài liệu (bên thứ ba).
-- 2026 admin PHP không chạy trên Vercel; public site thì đầy đủ.
-- Trang 2022 gốc có mất dữ liệu `?`; bản phục hồi dùng DOCX, không sửa bản gốc.
+### 2023
+- Chỉ 1 PDF `CHUONG TRI`NH HN GHEP TANG 2023 cap nhat.pdf` (640 KB).
+- Không có HTML/CSS/JS.
+
+### 2025
+- JPG 315, PDF 4, MP4 1, HTML 1.
+- `index.html` chỉ gồm ảnh trang chương trình + link Google Drive.
+- PDF lớn: 2 bản CTKH ~67 MB, CTKH 1 MB, thông báo bổ sung; trailer 27,4 MB.
+
+### 2026
+- DOCX 312, HTML 152, PDF 37, GIF 14, JS 10, PHP 9, XLSX 7, CSS 6, PPTX 6, JSON 5, PNG 4.
+- Public HTML 24; còn lại là admin, backup, tài liệu nội bộ (`File tham khao`), abstract DOCX.
+- 25 file nhắc `vsot.com.vn`.
+
+## 3. Phiên bản trùng lặp / liên quan
+
+| Nhóm | Phiên bản | Ghi chú |
+|---|---|---|
+| 2022 | `chuongtrinhhoinghi2022` (PHP/MySQL) | Website động, DB |
+| 2022 | `hoinghi2022` (Word HTML/PDF/DOCX) | Tài liệu tĩnh, nguồn phục hồi |
+| 2018/2019 | Cấu trúc PHP gần giống | Giữ riêng từng năm |
+| 2021 | Nhiều slide/PDF trùng tên với `pictures/` | Giữ tất cả |
+| 2025 | 2 PDF CTKH gần giống tên | Giữ cả hai |
+| 2026 | `backup/vsot-eau-design-20260904` | Bản thiết kế cũ, giữ nguyên |
+
+## 4. Tài nguyên ngoài thư mục năm
+
+- `public_html/pictures/`: ảnh/slide dùng chung, có thể liên quan 2021/2022.
+- `public_html/images/`, `banner3/`, `fonts/`, `js/`, `Scripts/`: tài nguyên dùng chung.
+- `public_html/book2019/`: bản CMS/sách 2019, không phải website hội nghị; giữ nguyên.
+- `public_html/zinzzloD`: file lạ 481,8 MB, không rõ công dụng; giữ nguyên, không mở/chạy.
+- `.env.local` 2026: **không đọc/copy**.
+- `File tham khao/` 2026: DOCX nội bộ/PII; không copy public.
+
+## 5. Khả năng triển khai độc lập
+
+| Năm | Trạng thái | Lý do |
+|---|---|---|
+| 2026 | Migrated | Static public, đã copy public-only |
+| 2025 | Migrated with limitations | Ảnh local; chưa copy PDF lớn/video |
+| 2023 | Migrated document | Chỉ PDF |
+| 2022 | Content restored | DOCX Unicode + bản full gốc |
+| 2018–2022 PHP | Backend pending | PHP/MySQL, chưa có DB dump |
+| 2020/2024 | Không có dữ liệu | Không có thư mục |
+
+## 6. Nguyên tắc bảo toàn
+
+- Không xóa file/thư mục trong PrototypeClone.
+- Mọi năm và mọi phiên bản đều được giữ.
+- Không đánh dấu migrated nếu chưa kiểm tra đủ trang/tài nguyên/chức năng.
+- File chưa xác định (`zinzzloD`, backup, `book2019`) giữ nguyên và ghi nhận.

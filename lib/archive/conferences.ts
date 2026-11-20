@@ -33,4 +33,19 @@ export const archiveConferences: ArchiveConference[] = [
     href: "/legacy/2022/index.html",
     kind: "site",
   },
+  {
+    year: 2021,
+    name: "Hội nghị khoa học thường niên VSOT 2021",
+    kind: "pending",
+  },
+  {
+    year: 2019,
+    name: "Hội nghị khoa học thường niên VSOT 2019",
+    kind: "pending",
+  },
+  {
+    year: 2018,
+    name: "Hội nghị khoa học thường niên VSOT 2018",
+    kind: "pending",
+  },
 ];

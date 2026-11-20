@@ -44,11 +44,10 @@
 
 ## 2. Nút truy cập trên website 2026
 
-- Đã thêm tại bản deploy `public/legacy/2026/index.html`:
-  - Submenu “Hội nghị 2026”.
-  - Mobile menu.
-  - CTA card “Hội nghị các năm trước”.
-- Link: `/vi/hoi-nghi/cac-nam-truoc`.
+- Đã thêm dropdown top-level “Hội nghị các năm trước” trong header 2026 (desktop + mobile details).
+- Dropdown chỉ gồm năm đã migrate: 2025, 2023 (PDF), 2022.
+- Logo VSOT trên site mới trỏ `/legacy/2026/index.html`.
+- CTA card và link archive vẫn giữ.
 - Bản gốc PrototypeClone không thay đổi.
 
 ## 3. Hội nghị các năm trước

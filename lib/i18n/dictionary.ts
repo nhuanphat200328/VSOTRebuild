@@ -9,6 +9,7 @@ type Dictionary = {
     contact: string;
     documents: string;
     news: string;
+    archive: string;
   };
   actions: {
     conferenceDetails: string;
@@ -68,6 +69,7 @@ const vi: Dictionary = {
     contact: "Liên hệ",
     documents: "Tài liệu",
     news: "Tin tức",
+    archive: "Hội nghị các năm trước",
   },
   actions: {
     conferenceDetails: "Thông tin hội nghị",
@@ -129,6 +131,7 @@ const en: Dictionary = {
     contact: "Contact",
     documents: "Documents",
     news: "News",
+    archive: "Previous Conferences",
   },
   actions: {
     conferenceDetails: "Congress information",

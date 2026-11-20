@@ -17,7 +17,7 @@ export function SiteFooter({
     <footer className="border-t border-line bg-ink-900 text-white/80">
       <Container className="grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Link href={`/${locale}`} className="flex items-center gap-3">
+          <Link href="/legacy/2026/index.html" className="flex items-center gap-3" aria-label="VSOT — Hội nghị 2026">
             <span className="grid size-11 place-items-center rounded-xl bg-white/10 text-sm font-extrabold text-white">
               VSOT
             </span>

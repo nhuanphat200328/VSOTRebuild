@@ -2272,3 +2272,35 @@ a.news-box:focus-visible {
     .prog-abstract-reader__meta { order: 3; flex-basis: 100%; }
     .prog-abstract-reader__back { min-height: 2.75rem; }
 }
+
+
+/* Previous conferences dropdown in mobile navigation */
+.mobile-nav details.mobile-nav-group > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .75rem 0;
+    color: var(--color-darkest);
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-gray-200);
+    cursor: pointer;
+    list-style: none;
+}
+.mobile-nav details.mobile-nav-group > summary::-webkit-details-marker {
+    display: none;
+}
+.mobile-nav details.mobile-nav-group > summary::after {
+    content: "+";
+    font-size: 1.25rem;
+    line-height: 1;
+}
+.mobile-nav details.mobile-nav-group[open] > summary::after {
+    content: "−";
+}
+.mobile-nav details.mobile-nav-group > a {
+    padding-left: 1rem;
+    font-size: 1rem;
+}
+
+.nav-item--archive .nav-link { font-size: .82rem; }

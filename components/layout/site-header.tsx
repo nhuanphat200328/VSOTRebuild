@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Globe2, Mail, MapPinned, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, Globe2, Mail, MapPinned, Menu, Phone, X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils/cn";
+import { archiveConferences } from "@/lib/archive/conferences";
 import type { Locale } from "@/lib/i18n/config";
 import type { getDictionary } from "@/lib/i18n/dictionary";
 
@@ -19,19 +20,20 @@ const navItems = [
   { key: "contact", href: "/lien-he" },
 ] as const;
 
-export function SiteHeader({
-  locale,
-  dict,
-}: {
-  locale: Locale;
-  dict: Dict;
-}) {
+const archiveLinks = archiveConferences.filter(
+  (conference) => conference.kind !== "pending" && conference.href,
+);
+
+export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dict }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [archiveOpen, setArchiveOpen] = useState(false);
+  const [mobileArchiveOpen, setMobileArchiveOpen] = useState(false);
   const otherLocale: Locale = locale === "vi" ? "en" : "vi";
   const parts = pathname.split("/");
   parts[1] = otherLocale;
   const switchHref = parts.join("/") || `/${otherLocale}`;
+  const archiveActive = pathname.startsWith("/legacy/") || pathname.includes("/cac-nam-truoc");
 
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-white/95 backdrop-blur">
@@ -42,17 +44,11 @@ export function SiteHeader({
             {dict.contact.address}
           </p>
           <div className="flex items-center gap-5">
-            <a
-              className="flex items-center gap-1.5 hover:text-brand-700"
-              href="tel:+84983723493"
-            >
+            <a className="flex items-center gap-1.5 hover:text-brand-700" href="tel:+84983723493">
               <Phone className="size-3.5" aria-hidden />
               +84 983 723 493
             </a>
-            <a
-              className="flex items-center gap-1.5 hover:text-brand-700"
-              href="mailto:vsot@outlook.com.vn"
-            >
+            <a className="flex items-center gap-1.5 hover:text-brand-700" href="mailto:vsot@outlook.com.vn">
               <Mail className="size-3.5" aria-hidden />
               vsot@outlook.com.vn
             </a>
@@ -62,9 +58,9 @@ export function SiteHeader({
 
       <Container className="flex h-[72px] items-center justify-between gap-4">
         <Link
-          href={`/${locale}`}
+          href="/legacy/2026/index.html"
           className="flex min-w-0 items-center gap-3"
-          aria-label="VSOT"
+          aria-label="VSOT — Hội nghị 2026"
         >
           <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-600 text-sm font-extrabold tracking-tight text-white shadow-sm">
             VSOT
@@ -89,6 +85,51 @@ export function SiteHeader({
               {dict.nav[item.key]}
             </Link>
           ))}
+
+          <div
+            className="group relative"
+            onMouseEnter={() => setArchiveOpen(true)}
+            onMouseLeave={() => setArchiveOpen(false)}
+          >
+            <button
+              type="button"
+              onClick={() => setArchiveOpen((value) => !value)}
+              className={cn(
+                "inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition hover:bg-brand-50 hover:text-brand-700",
+                archiveActive ? "bg-brand-50 text-brand-700" : "text-ink-700",
+              )}
+              aria-expanded={archiveOpen}
+              aria-haspopup="true"
+              aria-controls="desktop-archive-menu"
+            >
+              {dict.nav.archive}
+              <ChevronDown className="size-4" aria-hidden />
+            </button>
+            <div
+              id="desktop-archive-menu"
+              className={cn(
+                "absolute left-0 top-full z-50 min-w-56 rounded-xl border border-line bg-white p-1.5 shadow-xl shadow-ink-900/10",
+                archiveOpen ? "block" : "hidden group-hover:block group-focus-within:block",
+              )}
+            >
+              {archiveLinks.map((conference) => (
+                <a
+                  key={conference.year}
+                  href={conference.href}
+                  onClick={() => setArchiveOpen(false)}
+                  className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm font-semibold text-ink-700 hover:bg-brand-50 hover:text-brand-700"
+                >
+                  <span>
+                    {conference.year}
+                    {conference.kind === "document" ? " (PDF)" : ""}
+                  </span>
+                  <span className="text-[11px] text-ink-500">
+                    {conference.kind === "document" ? "PDF" : "Website"}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -101,7 +142,7 @@ export function SiteHeader({
             {otherLocale.toUpperCase()}
           </Link>
           <Link
-            href={`/${locale}#lien-he`}
+            href={`/${locale}/lien-he`}
             className="hidden rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 sm:inline-flex"
           >
             {dict.actions.contact}
@@ -121,10 +162,7 @@ export function SiteHeader({
 
       <div
         id="mobile-menu"
-        className={cn(
-          "border-t border-line bg-white lg:hidden",
-          open ? "block" : "hidden",
-        )}
+        className={cn("border-t border-line bg-white lg:hidden", open ? "block" : "hidden")}
       >
         <Container className="grid gap-1 py-3">
           {navItems.map((item) => (
@@ -137,6 +175,36 @@ export function SiteHeader({
               {dict.nav[item.key]}
             </Link>
           ))}
+
+          <button
+            type="button"
+            onClick={() => setMobileArchiveOpen((value) => !value)}
+            className="flex items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-ink-700 hover:bg-brand-50"
+            aria-expanded={mobileArchiveOpen}
+            aria-controls="mobile-archive-menu"
+          >
+            {dict.nav.archive}
+            <ChevronDown
+              className={cn("size-4 transition", mobileArchiveOpen ? "rotate-180" : "")}
+              aria-hidden
+            />
+          </button>
+          {mobileArchiveOpen ? (
+            <div id="mobile-archive-menu" className="ml-3 grid gap-1 border-l border-line pl-3">
+              {archiveLinks.map((conference) => (
+                <a
+                  key={conference.year}
+                  href={conference.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-ink-600 hover:bg-brand-50"
+                >
+                  {conference.year}
+                  {conference.kind === "document" ? " (PDF)" : ""}
+                </a>
+              ))}
+            </div>
+          ) : null}
+
           <Link
             href={switchHref}
             onClick={() => setOpen(false)}
@@ -150,5 +218,3 @@ export function SiteHeader({
     </header>
   );
 }
-
-

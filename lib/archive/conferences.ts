@@ -10,7 +10,7 @@ export type ArchiveConference = {
 };
 
 // 2026 is the current site and is intentionally not listed here.
-// 2020 and 2024 have no separate archived conference website.
+// 2020, 2024 have no archived website; 2018/2019/2021 PHP are pending.
 export const archiveConferences: ArchiveConference[] = [
   {
     year: 2025,
@@ -32,20 +32,5 @@ export const archiveConferences: ArchiveConference[] = [
     dates: "09–10/12/2022",
     href: "/legacy/2022/index.html",
     kind: "site",
-  },
-  {
-    year: 2021,
-    name: "Hội nghị khoa học thường niên VSOT 2021",
-    kind: "pending",
-  },
-  {
-    year: 2019,
-    name: "Hội nghị khoa học thường niên VSOT 2019",
-    kind: "pending",
-  },
-  {
-    year: 2018,
-    name: "Hội nghị khoa học thường niên VSOT 2018",
-    kind: "pending",
   },
 ];

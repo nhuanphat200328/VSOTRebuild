@@ -20,7 +20,9 @@ Kiểm tra lại sau xóa:
 - `Thumbs.db` còn lại: **0**
 - `.pyc` còn lại: **0**
 
-Manifest đầy đủ: `PROTOTYPE_ASSET_MANIFEST.csv` (9.304 dòng, gồm path, size,\nngày sửa, SHA-256). **File này giữ local, không commit vì chứa đường dẫn legacy\ncó thể chứa tên cá nhân.**
+Manifest đầy đủ: `PROTOTYPE_ASSET_MANIFEST.csv` (9.304 dòng, gồm path, size,
+ngày sửa, SHA-256). **File này giữ local, không commit vì chứa đường dẫn legacy
+có thể chứa tên cá nhân.**
 
 ---
 

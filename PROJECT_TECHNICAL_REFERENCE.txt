@@ -67,16 +67,20 @@ C. FRONTEND
 [DONE] Locale routing /[locale] (vi/en, middleware).
 [TODO] Components dùng chung: Button, Input, Card, Badge, Modal, Tabs,
        DataTable, EmptyState.
-[DONE] Programme List/Grid/Table, At a glance, Faculty, inline search.\n[TODO] Separate global search page.
+[DONE] Programme List/Grid/Table, At a glance, Faculty, inline search.
+[TODO] Separate global search page.
 [DONE] Admin layout + dashboard (read-only), login page, bootstrap endpoint.
 Chi tiết: SYSTEM_ARCHITECTURE.md, SITEMAP.md.
 
 D. BACKEND
 --------------------------------------------------------------------------------
 [DONE] Server action login. [TODO] Mutation admin khác.
-[PARTIAL] /api/health, /api/auth/signout, /api/bootstrap-super-admin.\n[DONE] Contact form server action + insert RLS (chưa có admin inbox/email).\n[TODO] /api/search, admin contact inbox.
+[PARTIAL] /api/health, /api/auth/signout, /api/bootstrap-super-admin.
+[DONE] Contact form server action + insert RLS (chưa có admin inbox/email).
+[TODO] /api/search, admin contact inbox.
 [DONE] Locale + session refresh + admin guard.
-[DONE] Supabase Auth client/server; public signup bị chặn bởi trigger 0013.\n[TODO] UI mời tài khoản, reset password.
+[DONE] Supabase Auth client/server; public signup bị chặn bởi trigger 0013.
+[TODO] UI mời tài khoản, reset password.
 [DONE] RBAC + RLS + helper has_permission().
 Chi tiết: SYSTEM_ARCHITECTURE.md, CMS_MODULES.md.
 
@@ -96,7 +100,10 @@ E. DATABASE
   0010 seed 4 roles + 31 permissions
   0011 storage buckets (media-public public, documents/legacy private)
   0012 migration tracking
-  0013 auth hardening (block public signup, bootstrap function)\n  0014 grant insert contact_requests cho anon\n  0015 guard Super Admin profile/role\n  0016 cho phép nhiều presentation legacy_pid NULL
+  0013 auth hardening (block public signup, bootstrap function)
+  0014 grant insert contact_requests cho anon
+  0015 guard Super Admin profile/role
+  0016 cho phép nhiều presentation legacy_pid NULL
 [DONE] Import 2026:
   conference 1, dates 5, rooms 6, sessions 65, presentations 255,
   people 245, session_people 127, presentation_people 221.
@@ -164,7 +171,8 @@ Typecheck            : npm run typecheck
 Test unit            : npm run test        (khi đã cấu hình)
 Test e2e             : npm run test:e2e    (khi đã cấu hình)
 Supabase CLI         : npx supabase --version
-Migration (local)    : python scripts/apply_migrations.py --apply (nếu có)\nImport 2026          : $env:PYTHONPATH=...; python scripts/import_2026.py
+Migration (local)    : python scripts/apply_migrations.py --apply (nếu có)
+Import 2026          : $env:PYTHONPATH=...; python scripts/import_2026.py
 Generate types       : npx supabase gen types typescript --project-id <ref> > supabase/types/database.types.ts
 Kiểm tra secret      : git grep -n "SUPABASE_SERVICE_ROLE_KEY" (không in giá trị)
 Sau khi đổi schema   : chạy typecheck + build + test.
@@ -184,14 +192,24 @@ K. CHANGE LOG
            |         | Phát hiện anon REST 401; cần xử lý.
 2026-11-20 | Phase 4 | [IN PROGRESS] Scaffold Next.js/Tailwind/Supabase.
 
-2026-11-20 | Auth    | [DONE] Tạo Super Admin; password grant 200; xóa bootstrap secret.\n2026-11-20 | Git     | [DONE] init ai-rebuild; commit 231af4e; push origin.\n2026-11-20 | Git     | [DONE] bỏ manifest/broken-links khỏi repo (privacy); commit 15aba7a.\n           |         | LƯU Ý: manifest vẫn tồn tại trong lịch sử commit 231af4e;\n           |         | repo đang public. Cần chuyển private hoặc rewrite history.\n2026-11-20 | Vercel  | [BLOCKED] CLI logged out; chưa có Preview deployment.\n2026-11-20 | Search  | [DONE] Instant search không dấu cho Programme và Faculty (client-side).
+2026-11-20 | Auth    | [DONE] Tạo Super Admin; password grant 200; xóa bootstrap secret.
+2026-11-20 | Git     | [DONE] init ai-rebuild; commit 231af4e; push origin.
+2026-11-20 | Git     | [DONE] bỏ manifest/broken-links khỏi repo (privacy); commit 15aba7a.
+           |         | LƯU Ý: manifest vẫn tồn tại trong lịch sử commit 231af4e;
+           |         | repo đang public. Cần chuyển private hoặc rewrite history.
+2026-11-20 | Vercel  | [BLOCKED] CLI logged out; chưa có Preview deployment.
+2026-11-20 | CMS     | [DONE] Pages CRUD song ngữ + public /[locale]/[slug].
+2026-11-20 | Search  | [DONE] Instant search không dấu cho Programme và Faculty (client-side).
            | Phase 6 | [DONE] Commit 61ace37; Vercel deploy success.
-2026-11-20 | Phase 6 | [DONE] Admin conferences + Programme Builder cơ bản.\n2026-11-20 | Vercel  | [DONE] vercel.json framework=nextjs; deploy success.\n2026-11-20 | Phase 4 | [DONE] Scaffold Next.js 16.4.6 + React 19.3.1 +
+2026-11-20 | Phase 6 | [DONE] Admin conferences + Programme Builder cơ bản.
+2026-11-20 | Vercel  | [DONE] vercel.json framework=nextjs; deploy success.
+2026-11-20 | Phase 4 | [DONE] Scaffold Next.js 16.4.6 + React 19.3.1 +
            |         | Tailwind 4.3.5 + TypeScript 5.9.3; npm install.
            |         | Public: home vi/en, conference list/landing, programme
            |         | List/Grid/Table, At a glance, session detail, Faculty
            |         | list/profile, inline search/filter.
-           |         | Admin: login, guard, dashboard; bootstrap endpoint.\n           |         | Contact form: UI + server action + DB insert (RLS).
+           |         | Admin: login, guard, dashboard; bootstrap endpoint.
+           |         | Contact form: UI + server action + DB insert (RLS).
            |         | DB: migrations 0001–0013, import 2026.
            |         | Build/typecheck/lint pass; route smoke test pass.
            |         | Chưa có CMS CRUD, contact form, legacy archive, search page.
@@ -214,6 +232,8 @@ Routes:
   /[locale]/dang-nhap                    admin login
   /admin/dashboard                       counts (service role, guarded)
   /admin/contacts                        contact inbox (contact.read)
+  /admin/pages, /admin/pages/new, /admin/pages/[id]  CMS Pages
+  /[locale]/[slug]                       public content page
   /api/health
   /api/bootstrap-super-admin
   /api/auth/signout

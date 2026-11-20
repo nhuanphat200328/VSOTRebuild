@@ -44,7 +44,8 @@ npm run build
 
 ## Database
 
-- Migrations: `supabase/migrations/0001..0013`.\n- Áp dụng: `python scripts/apply_migrations.py --apply` (mặc định dry-run).
+- Migrations: `supabase/migrations/0001..0013`.
+- Áp dụng: `python scripts/apply_migrations.py --apply` (mặc định dry-run).
 - Trạng thái hiện tại: đã áp dụng, public schema 35 bảng, RLS bật.
 - Import dữ liệu 2026 (idempotent):
 
@@ -80,8 +81,11 @@ Sau khi thành công:
 - `/vi/hoi-nghi/2026/chuong-trinh/tong-quan`
 - `/vi/hoi-nghi/2026/phien/[id]`
 - `/vi/hoi-nghi/2026/dien-gia`, `/dien-gia/[slug]`
-- `/vi/lien-he` (contact form)\n- `/vi/dang-nhap`
-- `/admin`, `/admin/dashboard`\n- `/admin/conferences`, `/admin/conferences/[id]/programme` (Programme Builder)
+- `/vi/lien-he` (contact form)
+- `/vi/dang-nhap`
+- `/admin`, `/admin/dashboard`
+- `/admin/conferences`, `/admin/conferences/[id]/programme` (Programme Builder)
+- `/admin/pages` (CMS Pages, song ngữ)
 - `/api/health`, `/api/bootstrap-super-admin`
 
 ## Trạng thái

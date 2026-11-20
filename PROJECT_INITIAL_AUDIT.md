@@ -2,7 +2,8 @@
 
 - Ngày audit: 2026-11-20 (Asia/Ho_Chi_Minh)
 - Phạm vi: PHASE 0 — Environment Audit
-- Trạng thái: Hoàn tất audit sơ bộ. **Cập nhật:** Phase 1 cleanup đã thực hiện ngày\n  2026-11-20 (xóa 28 file cache); xem `PROTOTYPE_CLEANUP_REPORT.md`.
+- Trạng thái: Hoàn tất audit sơ bộ. **Cập nhật:** Phase 1 cleanup đã thực hiện ngày
+  2026-11-20 (xóa 28 file cache); xem `PROTOTYPE_CLEANUP_REPORT.md`.
 - Người thực hiện: AI Coding Agent
 
 > Tài liệu này chỉ ghi nhận thông tin kiểm tra được. Không chứa mật khẩu, API key,

@@ -1,36 +1,35 @@
-﻿# TESTING_REPORT.md — VSOT Rebuild (snapshot)
+﻿# TESTING_REPORT.md — VSOT Rebuild
 
 - Ngày: 2026-11-20
-- Phạm vi: Phase 4 foundation + public programme views
-- Môi trường: local `next start` port 3100; Supabase project thật.
+- Phạm vi: foundation, public programme/faculty, CMS Pages, Programme Builder
+- Môi trường: local `next start` port 3100; Supabase project thật
 
 ## 1. Static checks
 
 | Check | Kết quả |
 |---|---|
 | `npm run typecheck` | PASS |
-| `npm run lint` | PASS (0 warning, 0 error) |
+| `npm run lint` | PASS |
 | `npm run build` | PASS (Next.js 16.4.6) |
 
 ## 2. Route smoke test
 
 | Route | HTTP |
 |---|---:|
-| `/vi` | 200 |
-| `/en` | 200 |
-| `/vi/hoi-nghi` | 200 |
-| `/vi/hoi-nghi/2026` | 200 |
-| `/vi/hoi-nghi/2026/chuong-trinh` | 200 |
-| `?view=grid` | 200 |
-| `?view=table` | 200 |
+| `/vi`, `/en` | 200 |
+| `/vi/hoi-nghi`, `/vi/hoi-nghi/2026` | 200 |
+| `/chuong-trinh`, `?view=grid`, `?view=table` | 200 |
 | `/chuong-trinh/tong-quan` | 200 |
-| `/phien/{uuid}` | 200 |
-| `/dien-gia` | 200 |
-| `/dien-gia?role=chair` | 200 |
-| `/dien-gia/{slug}` | 200 |
-| `/en/dien-gia/{slug}` | 200 |
+| `/phien/{uuid}`, `/dien-gia`, `/dien-gia/{slug}` | 200 |
+| `/vi/lien-he` | 200 |
 | `/vi/dang-nhap` | 200 |
 | `/admin` (chưa đăng nhập) | 307 → login |
+| `/admin/dashboard` (có session) | 200 |
+| `/admin/conferences` (có session) | 200 |
+| `/admin/conferences/{id}/programme` | 200 |
+| `/admin/conferences/{id}/programme/new` | 200 |
+| `/admin/pages`, `/admin/pages/new` | 200 |
+| `/vi/{slug}` (test page) | 200; test row đã xóa |
 | `/api/health` | 200 |
 | `/api/bootstrap-super-admin` sai secret | 401 |
 
@@ -43,43 +42,37 @@
 | Storage buckets | 3 |
 | Roles | 4 |
 | Permissions | 31 |
-| Migrations | 16 |\n| Auth users | 1 (Super Admin) |
+| Migrations | 16 |
+| Auth users | 1 (Super Admin) |
 | Conference 2026 | 1 |
-| Dates | 5 |
-| Rooms | 6 |
-| Sessions | 65 |
-| Presentations | 255 |
+| Dates / rooms | 5 / 6 |
+| Sessions / presentations | 65 / 255 |
 | People | 245 |
-| Session assignments | 127 |
-| Presentation assignments | 221 |
+| Session / presentation assignments | 127 / 221 |
 
 ## 4. Search
 
-- `matchesQuery('Hội nghị khoa học', 'hoi nghi')` → true.
-- `matchesQuery('Ghép thận', 'ghep than')` → true.
-- `matchesQuery('Nguyễn Văn A', 'nguyen van')` → true.
-- `normalizeSearch('Điều phối hiến tạng')` → `dieu phoi hien tang`.
-- Search chạy client-side, không cần Enter; Programme và Faculty.
+Đã kiểm tra `lib/utils/search.ts`:
+
+- `Hội nghị khoa học` khớp `hoi nghi`.
+- `Ghép thận` khớp `ghep than`.
+- `Nguyễn Văn A` khớp `nguyen van`.
+- `Điều phối hiến tạng` chuẩn hoá thành `dieu phoi hien tang`.
+
+Search chạy client-side, không cần Enter, áp dụng cho Programme và Faculty.
+Room/type/role filter cũng cập nhật ngay.
 
 ## 5. Chưa kiểm thử
 
-- Đăng nhập UI thật (chưa test qua trình duyệt); password grant Supabase trả 200.\n- Super Admin đã tạo; bootstrap secret đã xóa khỏi `.env.local`.
-- CMS CRUD (chưa triển khai).
-- Programme Builder UI (chưa triển khai).
-- Contact form: đã có UI + server action + insert RLS; chưa test qua trình duyệt, chưa có admin inbox/email.
-- Upload media (chưa triển khai).
-- Legacy archive mount (chưa triển khai).
-- Visual regression / Lighthouse / accessibility audit.
-- Mobile browser thật.
-- Vercel Preview / Production.
+- Submit form qua trình duyệt thật (CMS Pages, Programme Builder, contact).
+- News CMS, media upload, user management.
+- Legacy archive.
+- Visual regression, Lighthouse, accessibility audit, mobile browser thật.
+- Vercel Preview public do đang bật SSO Protection.
 
 ## 6. Rủi ro
 
-- Credential đã chia sẻ công khai → rotate trước Production.
-- `auth.disable_signup` trên Dashboard vẫn `false`; trigger DB đang chặn,
-  nhưng nên tắt ở cấu hình Auth.
-- Chưa có E2E auth; middleware/admin guard mới test ở mức redirect.\n- Vercel deployment báo success (commit dd589c3) nhưng Preview đang bật SSO protection.\n- Admin Programme Builder mới test render; chưa test submit form qua browser.
-
-
-
-
+- Credential từng chia sẻ công khai: phải rotate trước Production.
+- `auth.disable_signup` trên Dashboard vẫn `false`; trigger DB đang chặn.
+- Repo public; lịch sử commit đầu có manifest legacy. Nên private hoặc rewrite history.
+- `service_role` chỉ dùng server-side; không đưa vào `NEXT_PUBLIC_*`.

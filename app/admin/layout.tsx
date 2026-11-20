@@ -1,6 +1,6 @@
 ﻿import Link from "next/link";
 import { redirect } from "next/navigation";
-import { CalendarDays, LayoutDashboard, LogOut, Mail } from "lucide-react";
+import { CalendarDays, FileText, LayoutDashboard, LogOut, Mail } from "lucide-react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getUserAccess } from "@/lib/auth/access";
 
@@ -92,7 +92,18 @@ export default async function AdminLayout({
                 </Link>
               </li>
             ) : null}
-            <li className="px-2 py-1">Trang & tin tức — sắp triển khai</li>
+            {access.permissions.has("page.read") ? (
+              <li>
+                <Link
+                  href="/admin/pages"
+                  className="flex items-center gap-2 rounded-lg px-2 py-2 font-semibold text-ink-700 hover:bg-surface"
+                >
+                  <FileText className="size-4" aria-hidden />
+                  Trang nội dung
+                </Link>
+              </li>
+            ) : null}
+            <li className="px-2 py-1">Tin tức — sắp triển khai</li>
             <li className="px-2 py-1">Diễn giả — sắp triển khai</li>
             <li className="px-2 py-1">Media — sắp triển khai</li>
             <li className="px-2 py-1">Người dùng — sắp triển khai</li>

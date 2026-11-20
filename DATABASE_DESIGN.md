@@ -487,7 +487,8 @@ $$;
 - Hiện `anon` bị **401 khi gọi REST root** dù có `USAGE` trên schema public.
   Sau migration cần kiểm tra lại grant + API key; có thể phải dùng
   publishable key/secret mới hoặc bật Data API. Không bỏ qua.
-- `auth.disable_signup` hiện `false` → phải tắt trong Supabase Dashboard;\n  trigger `handle_new_user` (0013) đã chặn signup không có cờ `vsot_invite`.
+- `auth.disable_signup` hiện `false` → phải tắt trong Supabase Dashboard;
+  trigger `handle_new_user` (0013) đã chặn signup không có cờ `vsot_invite`.
 - `SUPABASE_JWT_SECRET` không dùng trong app; chỉ để tham chiếu khi rotate.
 
 ---

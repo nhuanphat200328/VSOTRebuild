@@ -13,7 +13,8 @@
 - [ ] Cập nhật `.env.local` và Environment Variables trên Vercel.
 - [ ] Không dùng lại `.env.local` hoặc `config.php` từ PrototypeClone.
 - [ ] Tắt public signup trong Supabase Dashboard (`Auth > Providers > Email`).
-- [x] Xóa `SUPER_ADMIN_BOOTSTRAP_SECRET` khỏi môi trường sau khi tạo Super Admin.\n- [x] Tạo Super Admin đầu tiên (email người dùng cấp).
+- [x] Xóa `SUPER_ADMIN_BOOTSTRAP_SECRET` khỏi môi trường sau khi tạo Super Admin.
+- [x] Tạo Super Admin đầu tiên (email người dùng cấp).
 - [ ] Kiểm tra `git grep` không có secret trước khi push.
 - [ ] Kiểm tra Vercel build logs không chứa secret.
 
@@ -26,7 +27,14 @@
 - [ ] Rate limit contact form (chưa triển khai).
 - [ ] Kiểm tra dependency (`npm audit`) trước release.
 
-## 3. Repo public / legacy manifest\n\n- [ ] Repo `VSOTRebuild` đang public và lịch sử commit 231af4e có chứa\n  `PROTOTYPE_ASSET_MANIFEST.csv` (đường dẫn file legacy có thể chứa tên cá nhân).\n  Ưu tiên: chuyển repo sang private, hoặc rewrite history có phê duyệt.\n- [ ] Không commit lại manifest/broken-links.\n\n## 4. Ghi chú
+## 3. Repo public / legacy manifest
+
+- [ ] Repo `VSOTRebuild` đang public và lịch sử commit 231af4e có chứa
+  `PROTOTYPE_ASSET_MANIFEST.csv` (đường dẫn file legacy có thể chứa tên cá nhân).
+  Ưu tiên: chuyển repo sang private, hoặc rewrite history có phê duyệt.
+- [ ] Không commit lại manifest/broken-links.
+
+## 4. Ghi chú
 
 - Rotate JWT secret sẽ làm mọi token cũ mất hiệu lực.
 - Rotate anon key sẽ làm client cũ lỗi cho đến khi deploy key mới.

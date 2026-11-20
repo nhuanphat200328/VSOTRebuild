@@ -53,7 +53,15 @@
 | Session assignments | 127 |
 | Presentation assignments | 221 |
 
-## 4. Chưa kiểm thử
+## 4. Search
+
+- `matchesQuery('Hội nghị khoa học', 'hoi nghi')` → true.
+- `matchesQuery('Ghép thận', 'ghep than')` → true.
+- `matchesQuery('Nguyễn Văn A', 'nguyen van')` → true.
+- `normalizeSearch('Điều phối hiến tạng')` → `dieu phoi hien tang`.
+- Search chạy client-side, không cần Enter; Programme và Faculty.
+
+## 5. Chưa kiểm thử
 
 - Đăng nhập UI thật (chưa test qua trình duyệt); password grant Supabase trả 200.\n- Super Admin đã tạo; bootstrap secret đã xóa khỏi `.env.local`.
 - CMS CRUD (chưa triển khai).
@@ -65,7 +73,7 @@
 - Mobile browser thật.
 - Vercel Preview / Production.
 
-## 5. Rủi ro
+## 6. Rủi ro
 
 - Credential đã chia sẻ công khai → rotate trước Production.
 - `auth.disable_signup` trên Dashboard vẫn `false`; trigger DB đang chặn,

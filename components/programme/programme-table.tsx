@@ -1,6 +1,6 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
-import { sessionTitle, typeName, type ProgrammeSession } from "@/lib/programme/data";
+import { sessionTitle, typeName, type ProgrammeSession } from "@/lib/programme/model";
 
 export function ProgrammeTable({
   sessions,
@@ -75,3 +75,4 @@ export function ProgrammeTable({
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { RoleBadge } from "@/components/programme/role-badge";
 import type { Locale } from "@/lib/i18n/config";
@@ -8,7 +8,7 @@ import {
   typeName,
   type ProgrammeSession,
   type SessionPerson,
-} from "@/lib/programme/data";
+} from "@/lib/programme/model";
 
 function PersonLine({
   person,
@@ -147,3 +147,4 @@ export function ProgrammeList({
     </div>
   );
 }
+

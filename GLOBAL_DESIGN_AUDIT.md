@@ -92,3 +92,16 @@
 - Google Maps: chỉ có 1 iframe tại `/legacy/2026/lien-he.html`; đổi sang query địa chỉ `201B Nguyễn Chí Thanh, Phường 12, Quận 5, TP. Hồ Chí Minh, Việt Nam`.
 - Đã kiểm tra HTTP: 2018/2019/2021/2026, archive, liên hệ: 200.
 - Chưa kiểm tra trực quan hover/screenshot trên trình duyệt; chưa xác minh marker Google Maps bằng mắt.
+
+
+## 9. Fix logo và menu archive
+
+- Nguyên nhân logo không hiển thị trên `/hoi-nghi/cac-nam-truoc`: Shared Header dùng `src="./asset/logo1507104171.gif"`, resolve thành `/hoi-nghi/cac-nam-truoc/asset/...` → 404.
+- Đã đổi tất cả logo header sang `/legacy/2026/asset/logo1507104171.gif`.
+- File logo: `public/legacy/2026/asset/logo1507104171.gif` (7.995 bytes), sao chép từ `hoinghi2026/asset`.
+- Link logo: `/legacy/2026/index.html`.
+- Nguyên nhân chữ “Hội nghị các năm” nhỏ: rule `.nav-item--archive .nav-link { font-size: .82rem; }` trong shared CSS và `2026/style/style.css`.
+- Đã bỏ rule nhỏ; dùng `font-size: inherit`, `white-space: nowrap`, `flex: 0 0 auto`.
+- Đã giảm nav gap từ 1.75rem xuống 1.3rem để đủ chỗ, không tăng chiều cao Header.
+- Kiểm tra HTTP: archive 200, logo 200, header shared 200.
+- Chưa kiểm tra Network/Console và hover trực quan bằng trình duyệt; mới xác minh HTTP.

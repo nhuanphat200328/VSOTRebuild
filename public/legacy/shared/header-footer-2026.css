@@ -427,7 +427,9 @@ p {
 .full-header *, .footer * { box-sizing: border-box; }
 .full-header { font-family: "Roboto", "Helvetica Neue", Arial, sans-serif; }
 .footer { font-family: "Roboto", "Helvetica Neue", Arial, sans-serif; }
-.nav-item--archive .nav-link { font-size: .82rem; }
+.nav-item--archive { flex: 0 0 auto; }
+.nav-item--archive .nav-link { font-size: inherit; white-space: nowrap; }
+.header-menu nav { gap: 1.3rem; }
 
 
 /* FOOTER WHITE OVERRIDE – shared standard */

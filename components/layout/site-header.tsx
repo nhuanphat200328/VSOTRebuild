@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ChevronDown, Globe2, Mail, MapPinned, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, Mail, MapPinned, Menu, Phone, X } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils/cn";
 import { archiveConferences } from "@/lib/archive/conferences";
@@ -29,10 +29,6 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dict }) {
   const [open, setOpen] = useState(false);
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [mobileArchiveOpen, setMobileArchiveOpen] = useState(false);
-  const otherLocale: Locale = locale === "vi" ? "en" : "vi";
-  const parts = pathname.split("/");
-  parts[1] = otherLocale;
-  const switchHref = parts.join("/") || `/${otherLocale}`;
   const archiveActive = pathname.startsWith("/legacy/") || pathname.includes("/cac-nam-truoc");
   const hrefForNav = (href: string) =>
     href.startsWith("/legacy/") ? href : `/${locale}${href}`;
@@ -135,15 +131,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dict }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            href={switchHref}
-            hrefLang={otherLocale}
-            className="hidden items-center gap-1.5 rounded-lg border border-line px-2.5 py-2 text-xs font-bold text-ink-700 transition hover:border-brand-300 hover:text-brand-700 sm:flex"
-          >
-            <Globe2 className="size-4" aria-hidden />
-            {otherLocale.toUpperCase()}
-          </Link>
-          <Link
+<Link
             href="/legacy/2026/lien-he.html"
             className="hidden rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 sm:inline-flex"
           >
@@ -206,16 +194,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dict }) {
               ))}
             </div>
           ) : null}
-
-          <Link
-            href={switchHref}
-            onClick={() => setOpen(false)}
-            className="mt-1 flex items-center gap-2 rounded-lg border border-line px-3 py-2.5 text-sm font-semibold text-ink-700"
-          >
-            <Globe2 className="size-4" aria-hidden />
-            {otherLocale === "en" ? "English" : "Tiếng Việt"}
-          </Link>
-        </Container>
+</Container>
       </div>
     </header>
   );

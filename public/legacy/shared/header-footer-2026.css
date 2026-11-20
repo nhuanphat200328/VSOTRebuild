@@ -428,3 +428,31 @@ p {
 .full-header { font-family: "Roboto", "Helvetica Neue", Arial, sans-serif; }
 .footer { font-family: "Roboto", "Helvetica Neue", Arial, sans-serif; }
 .nav-item--archive .nav-link { font-size: .82rem; }
+
+
+/* FOOTER WHITE OVERRIDE – shared standard */
+.footer,
+.footer .footer-list,
+.footer .footer-list a,
+.footer .footer-list li,
+.footer .footer-list h5,
+.footer .footer__sub-footer,
+.footer .footer__legal,
+.footer .footer__legal a,
+.footer .footer-logo,
+.footer p,
+.footer span,
+.footer div {
+    color: #FFFFFF !important;
+}
+.footer a,
+.footer a:visited,
+.footer a:hover,
+.footer a:focus,
+.footer a:active {
+    color: #FFFFFF !important;
+}
+.footer a:hover,
+.footer a:focus {
+    text-decoration: underline;
+}

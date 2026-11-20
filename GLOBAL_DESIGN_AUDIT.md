@@ -156,3 +156,13 @@
 - Không có tiêu đề chữ riêng trong Header 2026; nhận diện là logo + title/alt.
 - Đã kiểm tra HTTP 2026/2018/2019/2021/archive: 200; mobile menu HTML đúng.
 - Chưa kiểm tra 375/390/430 bằng trình duyệt/screenshot; model không đọc được ảnh đính kèm.
+
+
+## 14. Cache mobile thực tế
+
+- Không phát hiện Service Worker/manifest PWA trong website 2026; không có SW cache.
+- CSS Preview trả `Cache-Control: public, max-age=0, must-revalidate`; HTML có thể bị Chrome/bfcache giữ bản cũ.
+- Đã thêm query version `?v=20261120-3` cho `style.css` và `header-footer-2026.css` trên toàn bộ legacy HTML.
+- Đã thêm `vercel.json` header `Cache-Control: no-store, max-age=0, must-revalidate` cho `/legacy/*.html`.
+- Đã đồng bộ mobile menu mới + archive details trên tất cả trang.
+- Không thể xác minh Chrome Android thật do không có thiết bị/không đọc được screenshot; cần mở lại URL sau deploy hoặc dùng tab ẩn danh để loại cache cũ.

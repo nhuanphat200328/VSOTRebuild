@@ -69,7 +69,7 @@ const vi: Dictionary = {
     contact: "Liên hệ",
     documents: "Tài liệu",
     news: "Tin tức",
-    archive: "Hội nghị các năm trước",
+    archive: "Hội nghị các năm",
   },
   actions: {
     conferenceDetails: "Thông tin hội nghị",

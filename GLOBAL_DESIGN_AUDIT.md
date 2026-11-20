@@ -79,3 +79,16 @@
 - 2018/2019/2021 nội dung snapshot có thể còn `?` do encoding database cũ.
 - 2022 bản full gốc còn `?`; bản phục hồi là tóm tắt.
 - Chưa kiểm tra trình duyệt thật/desktop-tablet-mobile bằng screenshot; mới kiểm tra HTTP/HTML.
+
+
+## 8. Cập nhật lần cuối
+
+- Footer: thêm rule trắng + typography dùng chung trong `header-footer-2026.css`.
+- Footer 2018: nguyên nhân lệch cỡ chữ do CSS cũ `#main/footer` kế thừa; đã ép font-size `.95rem`, h5 `.9375rem`, font Roboto bằng `!important`.
+- Footer links: bỏ gạch chân mặc định, chỉ hover/focus mới gạch chân; mục liên hệ dạng text không bị gạch chân.
+- Header: đổi nhãn “Hội nghị các năm trước” → “Hội nghị các năm”; giữ dropdown.
+- Header: đã xóa toàn bộ English/lacoen khỏi HTML legacy và React Header.
+- Trang `/hoi-nghi/cac-nam-truoc` dùng shared header/footer HTML 2026 qua `public/legacy/shared/header.html` + `footer.html`, không dùng React SiteHeader/SiteFooter.
+- Google Maps: chỉ có 1 iframe tại `/legacy/2026/lien-he.html`; đổi sang query địa chỉ `201B Nguyễn Chí Thanh, Phường 12, Quận 5, TP. Hồ Chí Minh, Việt Nam`.
+- Đã kiểm tra HTTP: 2018/2019/2021/2026, archive, liên hệ: 200.
+- Chưa kiểm tra trực quan hover/screenshot trên trình duyệt; chưa xác minh marker Google Maps bằng mắt.

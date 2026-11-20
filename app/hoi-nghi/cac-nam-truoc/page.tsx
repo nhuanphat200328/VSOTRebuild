@@ -1,20 +1,23 @@
 import Link from "next/link";
 import { CalendarDays, ExternalLink, FileText, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { getDictionary } from "@/lib/i18n/dictionary";
+import fs from "node:fs";
+import path from "node:path";
 import { archiveConferences } from "@/lib/archive/conferences";
 
 export const metadata = { title: "Hội nghị các năm trước" };
 
 export default function ArchivePage() {
-  const locale = "vi" as const;
-  const dict = getDictionary(locale);
+  const sharedDir = path.join(process.cwd(), "public", "legacy", "shared");
+  const header = fs.readFileSync(path.join(sharedDir, "header.html"), "utf8");
+  const footer = fs.readFileSync(path.join(sharedDir, "footer.html"), "utf8");
 
   return (
     <div className="flex min-h-screen flex-col">
-      <SiteHeader locale={locale} dict={dict} />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+      {/* eslint-disable-next-line @next/next/no-css-tags */}
+      <link rel="stylesheet" href="/legacy/shared/header-footer-2026.css" />
+      <div dangerouslySetInnerHTML={{ __html: header }} />
       <main className="flex-1 bg-surface pb-20">
         <Container className="py-10">
           <Link href="/legacy/2026/index.html" className="text-sm font-semibold text-brand-700 hover:underline">
@@ -80,7 +83,7 @@ export default function ArchivePage() {
           </p>
         </Container>
       </main>
-      <SiteFooter locale={locale} dict={dict} />
+      <div dangerouslySetInnerHTML={{ __html: footer }} />
     </div>
   );
 }

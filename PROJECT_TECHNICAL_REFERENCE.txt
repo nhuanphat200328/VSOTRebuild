@@ -198,6 +198,8 @@ K. CHANGE LOG
            |         | LƯU Ý: manifest vẫn tồn tại trong lịch sử commit 231af4e;
            |         | repo đang public. Cần chuyển private hoặc rewrite history.
 2026-11-20 | Vercel  | [BLOCKED] CLI logged out; chưa có Preview deployment.
+2026-11-20 | CMS     | [DONE] Pages + News + Media + Users modules.
+           |         | Vercel deploy success; Preview vẫn SSO.
 2026-11-20 | CMS     | [DONE] Pages CRUD song ngữ + public /[locale]/[slug].
 2026-11-20 | Search  | [DONE] Instant search không dấu cho Programme và Faculty (client-side).
            | Phase 6 | [DONE] Commit 61ace37; Vercel deploy success.
@@ -233,7 +235,11 @@ Routes:
   /admin/dashboard                       counts (service role, guarded)
   /admin/contacts                        contact inbox (contact.read)
   /admin/pages, /admin/pages/new, /admin/pages/[id]  CMS Pages
-  /[locale]/[slug]                       public content page
+  /admin/news, /admin/news/categories, /admin/news/[id]
+  /admin/media                         media manager
+  /admin/users                         user management
+  /[locale]/[slug]                     public content page
+  /[locale]/tin-tuc, /[locale]/tin-tuc/[slug]  public news
   /api/health
   /api/bootstrap-super-admin
   /api/auth/signout

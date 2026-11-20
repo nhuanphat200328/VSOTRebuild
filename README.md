@@ -86,6 +86,9 @@ Sau khi thành công:
 - `/admin`, `/admin/dashboard`
 - `/admin/conferences`, `/admin/conferences/[id]/programme` (Programme Builder)
 - `/admin/pages` (CMS Pages, song ngữ)
+- `/admin/news`, `/admin/news/categories` (News CMS)
+- `/admin/media`, `/admin/users`
+- `/vi/tin-tuc`, `/vi/tin-tuc/[slug]`
 - `/api/health`, `/api/bootstrap-super-admin`
 
 ## Trạng thái

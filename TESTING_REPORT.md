@@ -29,6 +29,9 @@
 | `/admin/conferences/{id}/programme` | 200 |
 | `/admin/conferences/{id}/programme/new` | 200 |
 | `/admin/pages`, `/admin/pages/new` | 200 |
+| `/admin/news`, `/admin/news/new`, `/admin/news/categories` | 200 |
+| `/admin/media`, `/admin/users` | 200 |
+| `/vi/tin-tuc` | 200 |
 | `/vi/{slug}` (test page) | 200; test row đã xóa |
 | `/api/health` | 200 |
 | `/api/bootstrap-super-admin` sai secret | 401 |
@@ -65,7 +68,8 @@ Room/type/role filter cũng cập nhật ngay.
 ## 5. Chưa kiểm thử
 
 - Submit form qua trình duyệt thật (CMS Pages, Programme Builder, contact).
-- News CMS, media upload, user management.
+- Legacy archive, people admin, settings UI.
+- Media upload/user create chưa test submit (chỉ test render).
 - Legacy archive.
 - Visual regression, Lighthouse, accessibility audit, mobile browser thật.
 - Vercel Preview public do đang bật SSO Protection.

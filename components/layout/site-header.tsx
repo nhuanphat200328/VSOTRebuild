@@ -14,6 +14,7 @@ type Dict = ReturnType<typeof getDictionary>;
 const navItems = [
   { key: "home", href: "" },
   { key: "about", href: "#gioi-thieu" },
+  { key: "news", href: "/tin-tuc" },
   { key: "conference", href: "/hoi-nghi" },
   { key: "contact", href: "/lien-he" },
 ] as const;

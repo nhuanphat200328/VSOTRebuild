@@ -26,9 +26,10 @@
 - [ ] Rate limit contact form (chưa triển khai).
 - [ ] Kiểm tra dependency (`npm audit`) trước release.
 
-## 3. Ghi chú
+## 3. Repo public / legacy manifest\n\n- [ ] Repo `VSOTRebuild` đang public và lịch sử commit 231af4e có chứa\n  `PROTOTYPE_ASSET_MANIFEST.csv` (đường dẫn file legacy có thể chứa tên cá nhân).\n  Ưu tiên: chuyển repo sang private, hoặc rewrite history có phê duyệt.\n- [ ] Không commit lại manifest/broken-links.\n\n## 4. Ghi chú
 
 - Rotate JWT secret sẽ làm mọi token cũ mất hiệu lực.
 - Rotate anon key sẽ làm client cũ lỗi cho đến khi deploy key mới.
 - Không commit file chứa credential; `.gitignore` đã chặn `.env*`.
+
 

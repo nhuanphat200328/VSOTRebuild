@@ -1,0 +1,236 @@
+﻿================================================================================
+PROJECT_TECHNICAL_REFERENCE.txt
+VSOT Website Rebuild — Tài liệu kỹ thuật trung tâm
+================================================================================
+
+Cập nhật lần đầu : 2026-11-20
+Người cập nhật   : AI Coding Agent
+Trạng thái       : Phase 0–3 hoàn tất; Phase 4 nền tảng + public programme + admin login
+Quy ước          : [DONE] [IN PROGRESS] [TODO] [BLOCKED] [UNKNOWN]
+
+Tài liệu này KHÔNG chứa mật khẩu, API key, token hoặc nội dung .env.local.
+================================================================================
+
+A. PROJECT OVERVIEW
+--------------------------------------------------------------------------------
+Tên dự án        : VSOT Website Rebuild (workspace "2027 demo")
+Mục tiêu         : Xây lại website Hội Ghép tạng Việt Nam:
+                   - Public site song ngữ Việt–Anh, hiện đại, responsive.
+                   - CMS/Admin đầy đủ.
+                   - Quản lý hội nghị nhiều năm, Programme Builder.
+                   - Faculty + vai trò C/I/P (mở rộng D: discussant).
+                   - Archive website hội nghị cũ (hybrid).
+                   - Contact form + quản lý.
+Kiến trúc        : Next.js App Router + Supabase (Postgres/Auth/Storage)
+                   + Tailwind; RBAC + RLS; Vercel; GitHub.
+Stack phiên bản  : Next.js 16.4.6
+                   React 19.3.1
+                   TypeScript 5.x (strict; xem package.json thực tế)
+                   Tailwind CSS 4.3.5
+                   @supabase/ssr 0.12.7
+                   @supabase/supabase-js 2.119.2
+                   Node.js >= 20.9 (local: v24.17.0)
+Database         : Supabase PostgreSQL 17.12
+Project ref      : nkxlapocuspqwcavymqz
+                   (chỉ project ref; không ghi key/password)
+
+B. PROJECT STRUCTURE
+--------------------------------------------------------------------------------
+[DONE] D:\Philao\code project\VSOT\2027 demo
+  PROJECT_INITIAL_AUDIT.md          Audit môi trường (Phase 0)
+  PROTOTYPE_CLEANUP_REPORT.md       Báo cáo dọn dẹp PrototypeClone
+  PROTOTYPE_ASSET_MANIFEST.csv      Manifest 9.304 file còn lại + SHA-256
+  PROTOTYPE_BROKEN_LINKS.csv        Link nội bộ thiếu (có false positive)
+  CONTENT_INVENTORY.md              Kiểm kê nội dung
+  SITEMAP.md                        Sitemap public/admin
+  SYSTEM_ARCHITECTURE.md            Kiến trúc hệ thống
+  DATABASE_DESIGN.md                Schema/RLS/migration plan
+  CMS_MODULES.md                    Đặc tả module CMS
+  PROJECT_TECHNICAL_REFERENCE.txt   Tài liệu này
+  .env.local                        Secret local — KHÔNG commit
+  .env.example                      Danh sách biến, không có giá trị
+  .gitignore                        Chặn .env, node_modules, .next...
+  app/ components/ lib/ supabase/   (khởi tạo ở Phase 4)
+  public/                          Asset public
+  tests/                           Test (Phase 9)
+
+[CẤM] D:\Philao\code project\VSOT\PrototypeClone
+  READ-ONLY vĩnh viễn sau cleanup 2026-11-20.
+  Không sửa/đổi tên/di chuyển/xóa.
+  Nguồn tham chiếu giao diện + asset cũ.
+
+C. FRONTEND
+--------------------------------------------------------------------------------
+[DONE] Next.js App Router, RSC mặc định.
+[DONE] TypeScript strict.
+[DONE] Tailwind 4 CSS-first (globals.css + tokens).
+[DONE] Locale routing /[locale] (vi/en, middleware).
+[TODO] Components dùng chung: Button, Input, Card, Badge, Modal, Tabs,
+       DataTable, EmptyState.
+[DONE] Programme List/Grid/Table, At a glance, Faculty, inline search.\n[TODO] Separate global search page.
+[DONE] Admin layout + dashboard (read-only), login page, bootstrap endpoint.
+Chi tiết: SYSTEM_ARCHITECTURE.md, SITEMAP.md.
+
+D. BACKEND
+--------------------------------------------------------------------------------
+[DONE] Server action login. [TODO] Mutation admin khác.
+[PARTIAL] /api/health, /api/auth/signout, /api/bootstrap-super-admin.\n[DONE] Contact form server action + insert RLS (chưa có admin inbox/email).\n[TODO] /api/search, admin contact inbox.
+[DONE] Locale + session refresh + admin guard.
+[DONE] Supabase Auth client/server; public signup bị chặn bởi trigger 0013.\n[TODO] UI mời tài khoản, reset password.
+[DONE] RBAC + RLS + helper has_permission().
+Chi tiết: SYSTEM_ARCHITECTURE.md, CMS_MODULES.md.
+
+E. DATABASE
+--------------------------------------------------------------------------------
+[DONE] Audit ban đầu: public schema trống, auth.users=0, storage.buckets=0.
+[DONE] Migrations 0001..0015 đã áp dụng (15 bản ghi schema_migrations):
+  0001 enums/extensions
+  0002 RBAC (profiles/roles/permissions/user_roles/audit)
+  0003 media/settings
+  0004 pages/news
+  0005 conferences/rooms/dates/people
+  0006 programme (sessions/presentations/assignments)
+  0007 documents/contact/legacy
+  0008 functions/triggers + has_permission/is_super_admin
+  0009 RLS + grants (94 policies)
+  0010 seed 4 roles + 31 permissions
+  0011 storage buckets (media-public public, documents/legacy private)
+  0012 migration tracking
+  0013 auth hardening (block public signup, bootstrap function)\n  0014 grant insert contact_requests cho anon\n  0015 guard Super Admin profile/role
+[DONE] Import 2026:
+  conference 1, dates 5, rooms 6, sessions 65, presentations 255,
+  people 245, session_people 127, presentation_people 221.
+  Nguồn: supabase/seed/2026/programme.json (từ legacy programme.js).
+  Script: scripts/import_2026.py (idempotent, dùng DIRECT_URL).
+[FIXED] anon REST ban đầu 401; sau grant + reload schema đã trả 200 [].
+[OPEN] auth.disable_signup trên dashboard vẫn false; trigger 0013 chặn
+       public signup ở tầng DB, nhưng nên tắt trong Dashboard.
+Không ghi password/key trong tài liệu.
+
+F. AUTHENTICATION & AUTHORIZATION
+--------------------------------------------------------------------------------
+Roles: super_admin, admin, editor, viewer.
+Scope: global hoặc theo conference (user_roles.conference_id).
+Bootstrap: Method B, endpoint server-only, secret env, chỉ khi chưa có super_admin,
+           transaction + advisory lock, audit, vô hiệu sau khi dùng.
+[TODO] Triển khai bootstrap + test.
+
+G. PROGRAMME BUILDER
+--------------------------------------------------------------------------------
+Nguồn 2026: PrototypeClone/public_html/hoinghi2026/data/programme.js
+  - 5 ngày (13–17/10/2026), 6 phòng, 65 session, 255 presentation.
+  - 120 lượt chair, 7 discussant; 245 người unique; 49 người đa vai trò.
+  - Vai trò thực tế: C (chair), D (discussant), P (presenter).
+  - Không có I (invited) trong dữ liệu 2026.
+Quy tắc: không tự sửa giờ/phòng; cảnh báo xung đột; giữ thứ tự; hỗ trợ break;
+         không nhồi JSON; role gắn assignment.
+Public views: List/Grid/Table/At a glance/Faculty/Search.
+Chi tiết: DATABASE_DESIGN.md, CMS_MODULES.md.
+
+H. GITHUB
+--------------------------------------------------------------------------------
+Repo    : https://github.com/nhuanphat200328/VSOTRebuild
+Branch  : main (production), ai-rebuild (development)
+Local   : chưa có repo (2026-11-20); chưa có remote local.
+Remote  : git ls-remote trả 0 ref → repo có thể trống.
+CLI     : gh chưa cài.
+Quy trình:
+  1. git init tại "2027 demo".
+  2. git remote add origin <URL> (một lần).
+  3. Commit rõ ràng, không commit .env.local.
+  4. Push branch ai-rebuild để tạo Preview.
+  5. Không force push, không push main khi chưa được duyệt.
+[TODO] Khởi tạo repo + commit đầu tiên.
+
+I. VERCEL
+--------------------------------------------------------------------------------
+Project : [UNKNOWN] chưa kiểm tra do chưa có quyền/CLI.
+CLI     : chưa cài; có thể dùng npx vercel.
+Production branch: [UNKNOWN] — giả định main.
+Quy tắc  : chỉ Preview; không đổi domain/Production khi chưa duyệt.
+Env cần cấu hình: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY, SUPABASE_SERVICE_ROLE_KEY,
+  SUPABASE_SECRET_KEY, SUPER_ADMIN_BOOTSTRAP_SECRET, NEXT_PUBLIC_SITE_URL,
+  DATABASE_URL/DIRECT_URL (chỉ nếu chạy migration từ CI).
+
+J. COMMANDS
+--------------------------------------------------------------------------------
+Cài dependencies     : npm install
+Dev                  : npm run dev
+Build                : npm run build
+Start                : npm run start
+Lint                 : npm run lint
+Typecheck            : npm run typecheck
+Test unit            : npm run test        (khi đã cấu hình)
+Test e2e             : npm run test:e2e    (khi đã cấu hình)
+Supabase CLI         : npx supabase --version
+Migration (local)    : python scripts/apply_migrations.py --apply (nếu có)\nImport 2026          : $env:PYTHONPATH=...; python scripts/import_2026.py
+Generate types       : npx supabase gen types typescript --project-id <ref> > supabase/types/database.types.ts
+Kiểm tra secret      : git grep -n "SUPABASE_SERVICE_ROLE_KEY" (không in giá trị)
+Sau khi đổi schema   : chạy typecheck + build + test.
+
+K. CHANGE LOG
+--------------------------------------------------------------------------------
+2026-11-20 | Phase 0 | Audit môi trường; phát hiện workspace trống, repo trống,
+           |         | DB trống, thiếu CLI/credential.
+2026-11-20 | Phase 1 | Cleanup PrototypeClone: xóa 28 file cache (Thumbs.db + pyc),
+           |         | 9.332 → 9.304 file. Tạo cleanup report + manifest + broken links.
+           |         | PrototypeClone chuyển READ-ONLY.
+2026-11-20 | Phase 2 | Content inventory; xác định 2026 programme.js là nguồn chương
+           |         | trình; thống kê 65 session/255 presentation/245 người.
+2026-11-20 | Phase 3 | Thiết kế sitemap, kiến trúc, database, CMS modules.
+2026-11-20 | Env     | Ghi .env.local (không commit), tạo .env.example/.gitignore;
+           |         | xác minh Supabase: DB trống, auth 0 user, storage 0 bucket.
+           |         | Phát hiện anon REST 401; cần xử lý.
+2026-11-20 | Phase 4 | [IN PROGRESS] Scaffold Next.js/Tailwind/Supabase.
+
+2026-11-20 | Phase 4 | [DONE] Scaffold Next.js 16.4.6 + React 19.3.1 +
+           |         | Tailwind 4.3.5 + TypeScript 5.9.3; npm install.
+           |         | Public: home vi/en, conference list/landing, programme
+           |         | List/Grid/Table, At a glance, session detail, Faculty
+           |         | list/profile, inline search/filter.
+           |         | Admin: login, guard, dashboard; bootstrap endpoint.\n           |         | Contact form: UI + server action + DB insert (RLS).
+           |         | DB: migrations 0001–0013, import 2026.
+           |         | Build/typecheck/lint pass; route smoke test pass.
+           |         | Chưa có CMS CRUD, contact form, legacy archive, search page.
+           |         | Chưa tạo Super Admin (cần người dùng chạy bootstrap).
+
+
+L. CURRENT IMPLEMENTATION SNAPSHOT (2026-11-20)
+--------------------------------------------------------------------------------
+Routes:
+  /                                      redirect /vi
+  /[locale]                              home vi/en
+  /[locale]/hoi-nghi                     conference list
+  /[locale]/hoi-nghi/2026                conference landing
+  /[locale]/hoi-nghi/2026/chuong-trinh   List/Grid/Table + inline filter
+  /[locale]/hoi-nghi/2026/chuong-trinh/tong-quan
+  /[locale]/hoi-nghi/2026/phien/[id]     session detail
+  /[locale]/hoi-nghi/2026/dien-gia       faculty list
+  /[locale]/hoi-nghi/2026/dien-gia/[slug] profile
+  /[locale]/lien-he                      contact form
+  /[locale]/dang-nhap                    admin login
+  /admin/dashboard                       counts (service role, guarded)
+  /admin/contacts                        contact inbox (contact.read)
+  /api/health
+  /api/bootstrap-super-admin
+  /api/auth/signout
+Data: 2026 imported from legacy programme.js; 65 sessions, 255 presentations.
+Security: RLS 94 policies, signup blocked by trigger, bootstrap guard, admin guard.
+Not implemented: CMS CRUD, Programme Builder UI, media upload, users UI,
+legacy archive, standalone search, 2027 content.
+================================================================================
+GHI CHÚ BẢO MẬT
+--------------------------------------------------------------------------------
+- Credential đã gửi qua chat: coi như đã lộ. Phải rotate trước Production.
+- Không đưa service role key vào NEXT_PUBLIC_*.
+- Không commit .env.local; .gitignore đã chặn.
+- Bootstrap secret chỉ dùng một lần; xoá khỏi env sau khi tạo Super Admin.
+- Nếu phát hiện secret trong repo/log: thu hồi và rotate ngay.
+================================================================================
+
+
+
+
+
+

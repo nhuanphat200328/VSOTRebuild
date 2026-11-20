@@ -102,10 +102,6 @@ export function SiteFooter({
           <p>
             © {new Date().getFullYear()} {dict.footer.rights}
           </p>
-          <div className="flex flex-wrap gap-4">
-            <span>{dict.footer.privacy}</span>
-            <span>{dict.footer.terms}</span>
-          </div>
         </Container>
       </div>
     </footer>

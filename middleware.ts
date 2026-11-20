@@ -16,9 +16,10 @@ export async function middleware(request: NextRequest) {
   }
 
   const isAdmin = pathname.startsWith("/admin");
+  const isRootArchive = pathname.startsWith("/hoi-nghi");
   let locale = "vi";
 
-  if (!isAdmin) {
+  if (!isAdmin && !isRootArchive) {
     const segment = pathname.split("/")[1] ?? "";
     if (!LOCALES.has(segment)) {
       const url = request.nextUrl.clone();

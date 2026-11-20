@@ -41,7 +41,7 @@
 
 - `public/legacy/shared/legacy-shell.css`
 - `public/legacy/shared/legacy-shell.js`
-- Header/footer shell được nhúng vào:
+- Header/footer 2026 gốc được nhúng vào:
   - 2026: 23 HTML
   - 2018: 27 HTML
   - 2019: 27 HTML
@@ -74,7 +74,7 @@
 
 ## 7. Khác biệt còn tồn tại
 
-- 2026 và các năm cũ dùng shell HTML/CSS chung; một số chi tiết trang 2026 gốc (animation/logo gốc) được thay bằng shell để đảm bảo thống nhất.
+- 2026 và các năm cũ dùng cùng markup Header/Footer 2026 + `header-footer-2026.css`.
 - Next pages (`/hoi-nghi/cac-nam-truoc`, `/tin-tuc`, `/lien-he`) dùng React `SiteHeader/SiteFooter`, không phải shell HTML; thiết kế tương đồng nhưng không pixel-identical.
 - 2018/2019/2021 nội dung snapshot có thể còn `?` do encoding database cũ.
 - 2022 bản full gốc còn `?`; bản phục hồi là tóm tắt.

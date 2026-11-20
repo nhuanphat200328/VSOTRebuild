@@ -72,24 +72,30 @@ export default async function PreviousConferencesPage({
                     ) : null}
                   </p>
                 ) : null}
-                <a
-                  href={conference.href}
-                  target={conference.kind === "site" ? "_blank" : undefined}
-                  rel={conference.kind === "site" ? "noopener noreferrer" : undefined}
-                  className="mt-auto inline-flex w-fit items-center gap-2 rounded-lg bg-brand-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-brand-700"
-                >
-                  {conference.kind === "site" ? (
-                    <>
-                      {locale === "en" ? "Open website" : "Mở website"}
-                      <ExternalLink className="size-3.5" aria-hidden />
-                    </>
-                  ) : (
-                    <>
-                      {locale === "en" ? "View programme PDF" : "Xem chương trình PDF"}
-                      <FileText className="size-3.5" aria-hidden />
-                    </>
-                  )}
-                </a>
+                {conference.kind === "pending" ? (
+                  <p className="mt-auto inline-flex w-fit rounded-lg border border-line bg-surface px-3.5 py-2 text-xs font-bold text-ink-500">
+                    {locale === "en" ? "Backend migration pending" : "Đang chờ migrate backend PHP"}
+                  </p>
+                ) : (
+                  <a
+                    href={conference.href}
+                    target={conference.kind === "site" ? "_blank" : undefined}
+                    rel={conference.kind === "site" ? "noopener noreferrer" : undefined}
+                    className="mt-auto inline-flex w-fit items-center gap-2 rounded-lg bg-brand-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-brand-700"
+                  >
+                    {conference.kind === "site" ? (
+                      <>
+                        {locale === "en" ? "Open website" : "Mở website"}
+                        <ExternalLink className="size-3.5" aria-hidden />
+                      </>
+                    ) : (
+                      <>
+                        {locale === "en" ? "View programme PDF" : "Xem chương trình PDF"}
+                        <FileText className="size-3.5" aria-hidden />
+                      </>
+                    )}
+                  </a>
+                )}
               </div>
             </article>
           ))}
@@ -97,8 +103,8 @@ export default async function PreviousConferencesPage({
 
         <p className="mt-8 text-xs leading-relaxed text-ink-500">
           {locale === "en"
-            ? "Years 2020 and 2024 do not have a separate archived congress website in the source archive."
-            : "Các năm 2020 và 2024 không có website hội nghị riêng trong kho lưu trữ nguồn."}
+            ? "2018, 2019 and 2021 use a PHP/MySQL backend and are pending migration. Years 2020 and 2024 have no separate archived website."
+            : "Các năm 2018, 2019 và 2021 dùng backend PHP/MySQL, đang chờ migrate. Các năm 2020 và 2024 không có website hội nghị riêng."}
         </p>
       </Container>
     </div>

@@ -3,21 +3,21 @@ export type ArchiveConference = {
   name: string;
   dates?: string;
   location?: string;
-  href: string;
-  kind: "site" | "document";
+  href?: string;
+  kind: "site" | "document" | "pending";
   cover?: string;
   current?: boolean;
 };
 
-// URLs verified on 2026-11-20. 2026 is the live legacy conference website.
-// Years without a real website (2020, 2024) are intentionally absent.
+// 2026 is the current site and is intentionally not listed here.
+// 2020 and 2024 have no separate archived conference website.
 export const archiveConferences: ArchiveConference[] = [
   {
     year: 2025,
     name: "Hội nghị khoa học thường niên VSOT 2025",
-    href: "https://vsot.com.vn/hoinghi2025/",
+    href: "/legacy/2025/index.html",
     kind: "site",
-    cover: "/archive/covers/vsot-2025.jpg",
+    cover: "/legacy/2025/hoinghi-2025.jpg",
   },
   {
     year: 2023,
@@ -29,25 +29,23 @@ export const archiveConferences: ArchiveConference[] = [
     year: 2022,
     name: "Hội nghị khoa học thường niên VSOT 2022",
     location: "TP. Hồ Chí Minh",
-    href: "https://vsot.com.vn/hoinghi2022/chuong-trinh-hoi-nghi-final.htm",
+    dates: "09–10/12/2022",
+    href: "/legacy/2022/index.html",
     kind: "site",
   },
   {
     year: 2021,
     name: "Hội nghị khoa học thường niên VSOT 2021",
-    href: "https://vsot.com.vn/chuongtrinhhoinghi2021/",
-    kind: "site",
+    kind: "pending",
   },
   {
     year: 2019,
     name: "Hội nghị khoa học thường niên VSOT 2019",
-    href: "https://vsot.com.vn/chuongtrinhhoinghi2019/",
-    kind: "site",
+    kind: "pending",
   },
   {
     year: 2018,
     name: "Hội nghị khoa học thường niên VSOT 2018",
-    href: "https://vsot.com.vn/chuongtrinhhoinghi2018/",
-    kind: "site",
+    kind: "pending",
   },
 ];

@@ -2304,7 +2304,7 @@ a.news-box:focus-visible {
 
 .nav-item--archive { flex: 0 0 auto; }
 .nav-item--archive .nav-link { font-size: inherit; white-space: nowrap; }
-.header-menu nav { gap: 1.3rem; }
+.header-menu nav { gap: 1.75rem; }
 
 /* Mobile header: keep logo left, hamburger pinned right */
 @media (max-width: 1104px) {
@@ -2332,3 +2332,9 @@ a.news-box:focus-visible {
 .mobile-nav details.mobile-nav-archive > summary::after { content: "+"; font-size: 1.25rem; }
 .mobile-nav details.mobile-nav-archive[open] > summary::after { content: "−"; }
 .mobile-nav details.mobile-nav-archive > a { padding-left: 1rem; font-size: 1rem; }
+
+@media (max-width: 1104px) {
+    .inner-header { display: grid !important; grid-template-columns: 1fr auto; align-items: center; justify-content: initial; gap: 1rem; }
+    .header-menu, .header-button, .select-language { display: none !important; }
+    .hamburger-menu { display: flex !important; align-items: center; justify-content: flex-end; justify-self: end; margin: 0; }
+}

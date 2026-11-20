@@ -142,3 +142,17 @@
 - Không thay đổi CSS desktop (media query chỉ max 1104px).
 - Đã kiểm tra HTTP 2026/2018/2019/2021/archive: 200; mobile archive details có trong HTML.
 - Chưa kiểm tra viewport 375/390/430 bằng trình duyệt thật; chưa xác minh hover/tap thực tế.
+
+
+## 13. Mobile header – sửa theo screenshot (không đọc được ảnh)
+
+- Xác định DOM: Header tĩnh `.full-header > .inner-header`; mobile menu riêng `.mobile-nav`.
+- Nguyên nhân hamburger giữa: mobile vẫn để `.inner-header` flex với các item ẩn/không ẩn triệt để; đã chuyển mobile sang CSS Grid `1fr auto`, ẩn `.header-menu`, `.header-button`, `.select-language`.
+- Hamburger `justify-self:end`, không dùng absolute/translate.
+- Mobile menu cũ hardcode “Trang chủ/Giới thiệu VSOT…” đã thay bằng đúng 8 mục PC:
+  Hội ghép tạng VN, Hội nghị 2026, Chuyên đề, Tài liệu, Tin tức, Hội viên, Hội nghị các năm (details), Liên hệ.
+- `.mobile-nav-archive` dùng `<details>` + summary, tap mở/đóng, danh sách 2025/2023/2022/2021/2019/2018.
+- Desktop gap trả về `1.75rem` như gốc.
+- Không có tiêu đề chữ riêng trong Header 2026; nhận diện là logo + title/alt.
+- Đã kiểm tra HTTP 2026/2018/2019/2021/archive: 200; mobile menu HTML đúng.
+- Chưa kiểm tra 375/390/430 bằng trình duyệt/screenshot; model không đọc được ảnh đính kèm.

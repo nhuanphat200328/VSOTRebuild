@@ -2315,3 +2315,20 @@ a.news-box:focus-visible {
         justify-content: flex-end;
     }
 }
+
+/* Mobile-only header layout */
+@media (max-width: 1104px) {
+    .inner-header { justify-content: space-between; gap: 1rem; }
+    .header-menu, .header-button, .select-language { display: none !important; }
+    .hamburger-menu { margin-left: auto; display: flex; align-items: center; justify-content: flex-end; }
+}
+.mobile-nav details.mobile-nav-archive { border-bottom: 1px solid var(--color-gray-200); }
+.mobile-nav details.mobile-nav-archive > summary {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .75rem 0; color: var(--color-darkest);
+    font-size: 1.125rem; cursor: pointer; list-style: none;
+}
+.mobile-nav details.mobile-nav-archive > summary::-webkit-details-marker { display: none; }
+.mobile-nav details.mobile-nav-archive > summary::after { content: "+"; font-size: 1.25rem; }
+.mobile-nav details.mobile-nav-archive[open] > summary::after { content: "−"; }
+.mobile-nav details.mobile-nav-archive > a { padding-left: 1rem; font-size: 1rem; }

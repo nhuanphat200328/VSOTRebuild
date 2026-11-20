@@ -126,3 +126,19 @@
 - Logo link thêm `aria-label`/`title` “Hội Ghép tạng Việt Nam”; logo vẫn trỏ `/legacy/2026/index.html`.
 - Header 2026 không có tiêu đề chữ riêng; tiêu đề nhận diện là logo + alt/title.
 - Chưa kiểm tra mobile bằng trình duyệt thật.
+
+
+## 12. Mobile header – nguyên nhân và sửa lần cuối
+
+- Header render thực tế: markup tĩnh trong từng file legacy + `public/legacy/shared/header.html` cho archive. Không phải React SiteHeader cho các trang legacy.
+- Lần trước chỉ thêm `margin-left:auto` cho hamburger, nhưng `.header-menu`/`.header-button` vẫn chiếm flex item và chưa có `justify-content:space-between`; đồng thời rule nằm sau nhiều CSS cũ nên dễ bị ghi đè.
+- Mobile nav là `.mobile-nav` riêng, không render `.nav-item--archive`; vì vậy “Hội nghị các năm” không xuất hiện.
+- Đã sửa:
+  - `@media(max-width:1104px)`: `.inner-header { justify-content:space-between }`.
+  - Ẩn `.header-menu`, `.header-button`, `.select-language` trên mobile.
+  - `.hamburger-menu { margin-left:auto; display:flex; align-items:center }`.
+  - Thêm `<details class="mobile-nav-archive">` vào `.mobile-nav` tất cả trang legacy, gồm 2025/2023/2022/2021/2019/2018.
+  - CSS details: summary giống link, tap mở/đóng, không phụ thuộc hover.
+- Không thay đổi CSS desktop (media query chỉ max 1104px).
+- Đã kiểm tra HTTP 2026/2018/2019/2021/archive: 200; mobile archive details có trong HTML.
+- Chưa kiểm tra viewport 375/390/430 bằng trình duyệt thật; chưa xác minh hover/tap thực tế.

@@ -13,16 +13,6 @@ export type ArchiveConference = {
 // Years without a real website (2020, 2024) are intentionally absent.
 export const archiveConferences: ArchiveConference[] = [
   {
-    year: 2026,
-    name: "Hội nghị khoa học thường niên lần XI — VSOT 2026",
-    dates: "13–17/10/2026",
-    location: "TP. Đà Nẵng",
-    href: "/legacy/2026/index.html",
-    kind: "site",
-    cover: "/archive/covers/vsot-2026.png",
-    current: true,
-  },
-  {
     year: 2025,
     name: "Hội nghị khoa học thường niên VSOT 2025",
     href: "https://vsot.com.vn/hoinghi2025/",

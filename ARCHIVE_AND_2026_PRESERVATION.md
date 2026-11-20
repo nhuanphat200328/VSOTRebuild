@@ -42,7 +42,16 @@
 - Các form public của 2026 là liên kết tĩnh/Google Form, không có POST PHP trong HTML.
 - Bản gốc vẫn đầy đủ trong PrototypeClone và Vercel legacy project `vsot-website`.
 
-## 2. Hội nghị các năm trước
+## 2. Nút truy cập trên website 2026
+
+- Đã thêm tại bản deploy `public/legacy/2026/index.html`:
+  - Submenu “Hội nghị 2026”.
+  - Mobile menu.
+  - CTA card “Hội nghị các năm trước”.
+- Link: `/vi/hoi-nghi/cac-nam-truoc`.
+- Bản gốc PrototypeClone không thay đổi.
+
+## 3. Hội nghị các năm trước
 
 URL: `/[locale]/hoi-nghi/cac-nam-truoc`
 
@@ -50,7 +59,6 @@ Mapping đã xác minh:
 
 | Năm | Nguồn / URL | Loại | Ghi chú |
 |---:|---|---|---|
-| 2026 | `/legacy/2026/index.html` | static local | Bản sao public đầy đủ |
 | 2025 | `https://vsot.com.vn/hoinghi2025/` | live site | 200 |
 | 2023 | `/archive/2023/chuong-trinh-vsot-2023.pdf` | PDF local | Không có website HTML |
 | 2022 | `https://vsot.com.vn/hoinghi2022/chuong-trinh-hoi-nghi-final.htm` | static page | 200 |
@@ -59,8 +67,9 @@ Mapping đã xác minh:
 | 2018 | `https://vsot.com.vn/chuongtrinhhoinghi2018/` | PHP site | 200 |
 
 Không có website riêng cho 2020 và 2024 trong kho nguồn.
+Không đưa 2026 vào danh sách vì 2026 là website hiện tại.
 
-### 2.1. Nguyên tắc
+### 3.1. Nguyên tắc
 - Không đổi giao diện website cũ.
 - Không ép template mới.
 - 2018–2022 dùng hosting cũ vì phụ thuộc PHP/MySQL.
@@ -68,7 +77,7 @@ Không có website riêng cho 2020 và 2024 trong kho nguồn.
 - 2026 tự host trong Next để không phụ thuộc project Vercel legacy.
 - Link archive không trỏ đường dẫn ổ D.
 
-## 3. Kiểm thử
+## 4. Kiểm thử
 
 - Root 307 → `/legacy/2026/index.html`.
 - Legacy 2026: HTML/CSS/JS/data/PDF trả 200.
@@ -77,7 +86,7 @@ Không có website riêng cho 2020 và 2024 trong kho nguồn.
 - 2023 PDF local: 200.
 - 2020/2024 không có website.
 
-## 4. Việc còn lại
+## 5. Việc còn lại
 
 - Nếu muốn tự host 2018–2022: cần môi trường PHP/MySQL hoặc snapshot HTML tĩnh.
 - Nếu muốn tự host 2025: cần copy ~192 MB asset/PDF/video.

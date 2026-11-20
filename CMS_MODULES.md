@@ -6,6 +6,27 @@
 
 ---
 
+## 0. TRẠNG THÁI TRIỂN KHAI (review 2026-11-20)
+
+> Thực tế: mutation dùng service role nên chỉ kiểm quyền ở server action, **chưa** có lớp RLS cho thao tác CMS (SEC-01).
+
+| Module | Trạng thái | Đã có | Còn thiếu / lỗi đã biết |
+|---|---|---|---|
+| 1. Dashboard | Một phần | Đếm hội nghị, phiên, diễn giả, tin, liên hệ mới | Khối “Trạng thái hệ thống” hardcode (DATA-10); chưa có chờ duyệt, bản dịch thiếu, audit, cảnh báo |
+| 2. Pages | Phần lớn | CRUD song ngữ, SEO, xóa mềm, kiểm `page.publish` | Slug trùng route tĩnh (DATA-03); `published_at` bị ghi đè (DATA-01); chưa preview/draft token; chưa audit |
+| 3. News | Phần lớn | CRUD song ngữ, danh mục (tạo), featured, ngày đăng | Không kiểm publish cho `en_status`, danh mục (SEC-02); múi giờ `published_at` (DATA-02); chưa sửa/xóa danh mục, cover, related |
+| 4. Conferences | Chỉ đọc | Danh sách, link Programme Builder | Chưa tạo/sửa hội nghị, ngày, phòng, track, tài liệu, sponsor (ROADMAP R4.1) |
+| 5. Programme Builder | Cơ bản | Lọc theo ngày, tạo/sửa phiên (chặn trùng phòng), tạo/sửa báo cáo | Không kiểm publish báo cáo (SEC-02); `sort` báo cáo (DATA-05); chưa kiểm khung giờ (DATA-06); chưa xóa, kéo-thả, phân công người, import UI, trang validate (ROADMAP R4.2–R4.3) |
+| 6. People / Faculty | Chưa có (admin) | Public: danh sách + hồ sơ | ROADMAP R4.2 |
+| 7. Media | Cơ bản | Upload ảnh/PDF, xóa có kiểm tham chiếu | File > 1 MB lỗi (BUG-05); cho SVG, MIME tin client (SEC-05); chưa sửa alt, chưa audit |
+| 8. Users & Roles | Cơ bản | Tạo user (mật khẩu tạm), gán role global, khóa/mở | Chưa mời qua email, reset mật khẩu, role theo hội nghị, trang roles (ROADMAP R4.7) |
+| 9. Bootstrap | Xong | Đã tạo Super Admin; endpoint trả 503 | Gỡ endpoint (ROADMAP R3.4) |
+| 10. Contact | Cơ bản | Inbox lọc/tìm, đổi trạng thái, thêm ghi chú | Tìm kiếm chưa sanitize (SEC-04); chưa xem lịch sử ghi chú, export CSV; form chưa rate limit (SEC-06) |
+| 11. Audit log | Một phần | Ghi ở users + bootstrap | Ghi cho mọi module (FIX-13); trang xem (ROADMAP R4.6) |
+| 12. Settings | Chưa có | — | ROADMAP R4.6 |
+
+---
+
 ## 1. DASHBOARD
 
 Hiển thị (dữ liệu thật):

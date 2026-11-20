@@ -100,7 +100,7 @@
 | `/legacy/2025/pictures/01.jpg` | 200 |
 | `/legacy/2022/index.html` | 200 |
 | `/legacy/2022/files/chuong-trinh-final.pdf` | 200 |
-| `/vi/hoi-nghi/cac-nam-truoc` | 200, hiển thị 2025/2023/2022/2021/2019/2018 |
+| `/vi/hoi-nghi/cac-nam-truoc` | 200 tại thời điểm ghi — **nay 404**, trang đã chuyển sang `/hoi-nghi/cac-nam-truoc` (review 2026-11-20, FIX-02) |
 | `typecheck`, `lint`, `build` | PASS |
 
 ## 7. Chưa hoàn thành / giới hạn

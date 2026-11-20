@@ -182,3 +182,21 @@
 - Áp dụng cho 2018/2019/2021/2022/2023/2025/2026.
 - Đã kiểm tra HTTP các trang: 200; CSS chứa rule isolation.
 - Chưa thể kiểm tra screenshot/device thật; cần xác nhận trên Preview.
+
+
+## 16. Review 2026-11-20 — lỗi còn tồn tại (chưa sửa)
+
+- **Link tương đối trong `public/legacy/shared/header.html`** (BUG-03): các mục `index.html`, `chuyen-de.html`, `tai-lieu.html`,
+  `tin-tuc.html`, `hoi-vien.html`, `lien-he.html`, các trang con thông báo/chuyên đề… là đường dẫn tương đối.
+  Header này được nhúng vào `/hoi-nghi/cac-nam-truoc` ⇒ link resolve thành `/hoi-nghi/<file>.html` ⇒ 404.
+  Cùng nguyên nhân với lỗi logo đã sửa ở §9 (lần đó chỉ sửa `src` của logo). Header nhúng sẵn trong
+  `public/legacy/2018/index.html` đã dùng `/legacy/2026/...` tuyệt đối — làm theo mẫu này. → FIX-03.
+- **Social icon `href=""`** (Facebook/YouTube/LinkedIn) trong `shared/footer.html` và footer các trang 2026: bấm là tải lại trang.
+  Cần URL thật từ chủ dự án (D4); không tự đặt link.
+- **Menu desktop vs mobile:** mobile có mục “Hội ghép tạng Việt Nam” (`gioi-thieu.html`), desktop không có (logo đảm nhiệm).
+  Mục §2 liệt kê “Hội Ghép tạng VN” là mục đầu menu — cần chủ dự án xác nhận thiết kế mong muốn.
+- **React `SiteHeader`** (trang `/vi/tin-tuc`, `/vi/lien-he`, `/vi/hoi-nghi/...`): nút CTA “Liên hệ” trỏ `/legacy/2026/lien-he.html`
+  trong khi menu “Liên hệ” trỏ `/vi/lien-he` (form) — 2 đích khác nhau (D2). Class `text-ink-600` không có trong theme.
+- **Trang archive đọc header/footer bằng `fs` lúc runtime** — cần xác minh trên Vercel Preview (BUG-07, FIX-07).
+- Quy tắc cho lần sửa sau: mọi `href`/`src` trong `public/legacy/shared/*` phải bắt đầu bằng `/`; sau khi sửa CSS legacy
+  tăng `?v=` trên **tất cả** trang legacy; kiểm bằng `scripts/smoke.mjs` (FIX-00). Ghi rõ phần chưa kiểm trên thiết bị thật.

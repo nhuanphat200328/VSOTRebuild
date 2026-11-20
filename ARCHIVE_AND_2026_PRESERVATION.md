@@ -3,6 +3,13 @@
 - Ngày: 2026-11-20
 - Mục tiêu: bảo toàn website VSOT 2026 và xây mục Hội nghị các năm trước.
 
+> **Cập nhật 2026-11-20 (review):** một số thông tin bên dưới đã bị thay thế bởi các bước sau đó:
+> - Trang archive nay ở **`/hoi-nghi/cac-nam-truoc`** (ngoài `[locale]`); `/vi/hoi-nghi/cac-nam-truoc` hiện 404 (BUG-02, FIX-02).
+> - 2018/2019/2021/2022/2025 đã **tự host snapshot** dưới `/legacy/<năm>/` (xem `LEGACY_MIGRATION_REPORT.md`),
+>   không còn trỏ `vsot.com.vn`. Nguồn danh sách: `lib/archive/conferences.ts`.
+> - Dropdown archive gồm 2025, 2023, 2022, 2021, 2019, 2018.
+> - Header dùng chung `public/legacy/shared/header.html` còn link tương đối (BUG-03, FIX-03).
+
 ## 1. Website VSOT 2026
 
 ### 1.1. Bản gốc
@@ -52,7 +59,20 @@
 
 ## 3. Hội nghị các năm trước
 
-URL: `/[locale]/hoi-nghi/cac-nam-truoc`
+URL: ~~`/[locale]/hoi-nghi/cac-nam-truoc`~~ → **`/hoi-nghi/cac-nam-truoc`** (cập nhật 2026-11-20)
+
+Bảng dưới là mapping **ban đầu**; mapping hiện hành:
+
+| Năm | URL hiện hành |
+|---:|---|
+| 2025 | `/legacy/2025/index.html` |
+| 2023 | `/legacy/2023/index.html` (wrapper + PDF `/archive/2023/chuong-trinh-vsot-2023.pdf`) |
+| 2022 | `/legacy/2022/index.html` |
+| 2021 | `/legacy/2021/index.html` |
+| 2019 | `/legacy/2019/index.html` |
+| 2018 | `/legacy/2018/index.html` |
+
+Mapping ban đầu (lịch sử):
 
 Mapping đã xác minh:
 

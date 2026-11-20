@@ -3,6 +3,33 @@
 - Ngày: 2026-11-20
 - Locale: `vi` (mặc định), `en`
 - URL pattern: `/{locale}/...`; root `/` redirect theo cookie `vsot_locale` (fallback `vi`).
+  **Thực tế (2026-11-20):** `/` → `/legacy/2026/index.html`; không có cookie `vsot_locale`.
+
+---
+
+## 0. TRẠNG THÁI ROUTE THỰC TẾ (review 2026-11-20)
+
+Sitemap bên dưới là thiết kế mục tiêu. Bảng này cho biết route nào **đã có** trong mã.
+
+| Route thiết kế | Trạng thái | Ghi chú |
+|---|---|---|
+| `/` | Có (khác thiết kế) | Redirect tới website 2026 bảo toàn |
+| `/[locale]` (trang chủ) | **Không có → 404** | Đã xóa có chủ đích; FIX-01 chuyển thành redirect |
+| `/[locale]/gioi-thieu/*`, `/hoi-vien`, `/hoat-dong/*`, `/tai-lieu`, `/thu-vien-hinh-anh` | Chưa có | Dùng trang legacy 2026 tương ứng (`/legacy/2026/gioi-thieu.html`, `hoi-vien.html`, `tai-lieu.html`…) |
+| `/[locale]/tin-tuc`, `/tin-tuc/[slug]` | Có | `/tin-tuc/[category]` chưa có |
+| `/[locale]/hoi-nghi`, `/hoi-nghi/[year]` | Có | |
+| `/[locale]/hoi-nghi/[year]/chuong-trinh` (+ `tong-quan`) | Có | `?date=&view=&q=&room=&type=`; đổi view làm mất bộ lọc (DATA-09) |
+| `/[locale]/hoi-nghi/[year]/phien/[id]` | Có | Chưa kiểm phiên thuộc đúng năm (BUG-06) |
+| `/[locale]/hoi-nghi/[year]/bao-cao/[id]`, `/tai-lieu`, `/archive`, `/chuong-trinh/tim-kiem` | Chưa có | |
+| `/[locale]/hoi-nghi/[year]/dien-gia` (+ `[slug]`) | Có | Lọc role: chair/discussant/presenter |
+| `/archive`, `/archive/[slug]` | Không dùng | Thay bằng **`/hoi-nghi/cac-nam-truoc`** (ngoài locale) + `/legacy/[year]/...` |
+| `/[locale]/lien-he` | Có | Song song với `/legacy/2026/lien-he.html` (D2) |
+| `/[locale]/tim-kiem`, `/chinh-sach-bao-mat`, `/mien-tru-trach-nhiem` | Chưa có | Footer 2026 đã bỏ link legal (GLOBAL_DESIGN_AUDIT §5) |
+| `/[locale]/[slug]` (trang CMS) | Có | Không đặt slug trùng route tĩnh (FIX-08) |
+| `/[locale]/dang-nhap` | Có | `/dang-xuat`, `/quen-mat-khau`, `/dat-mat-khau` chưa có (đăng xuất = `POST /api/auth/signout`) |
+| `/admin/dashboard`, `/pages*`, `/news*`, `/media`, `/contacts`, `/users` | Có | `/contacts/[id]`, `/users/invite`, `/users/[id]` chưa có |
+| `/admin/conferences`, `/conferences/[id]/programme` (+ `new`, `[sessionId]`) | Có | `/conferences/new`, `/[id]`, `/settings`, `/dates`, `/rooms`, `/import`, `/faculty`, `/documents`, `/sponsors`, `/legacy` chưa có |
+| `/admin/people*`, `/roles`, `/audit`, `/settings`, `/profile` | Chưa có | ROADMAP R4 |
 
 ---
 

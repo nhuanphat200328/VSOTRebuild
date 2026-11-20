@@ -85,3 +85,24 @@ Room/type/role filter cũng cập nhật ngay.
 - `auth.disable_signup` trên Dashboard vẫn `false`; trigger DB đang chặn.
 - Repo public; lịch sử commit đầu có manifest legacy. Nên private hoặc rewrite history.
 - `service_role` chỉ dùng server-side; không đưa vào `NEXT_PUBLIC_*`.
+- Mutation CMS dùng `service_role` nên RLS/trigger không áp dụng cho thao tác admin; quyền chỉ kiểm ở app (SEC-01).
+
+## 7. Đối chiếu với mã nguồn (review tĩnh 2026-11-20)
+
+> Review đọc mã, **chưa chạy lại** test (môi trường review không có `node_modules`/Supabase).
+> Các dòng dưới đây cho biết kết quả ở §2 **không còn đúng** với mã hiện tại; cần chạy lại bằng `scripts/smoke.mjs` (FIX-00).
+
+| Route trong §2 | Kết quả cũ | Theo mã hiện tại | Lý do / việc sửa |
+|---|---:|---|---|
+| `/vi`, `/en` | 200 | **404** | Không có `app/[locale]/page.tsx` (đã xóa có chủ đích, `GLOBAL_DESIGN_AUDIT.md` §5). FIX-01 |
+| `/vi/hoi-nghi/cac-nam-truoc` | 200 | **404** | Archive đã chuyển sang `/hoi-nghi/cac-nam-truoc`; `/vi/...` rơi vào route `[year]`. FIX-02 |
+| `/hoi-nghi/cac-nam-truoc` (menu desktop) | — | Nhiều link **404** | `public/legacy/shared/header.html` dùng link tương đối. FIX-03 |
+| Đăng xuất | — | Redirect sai | 307 + fallback `localhost` + đích `/vi` 404. FIX-04 |
+| Upload media | chưa test submit | Lỗi với file > 1 MB | Giới hạn body Server Action 1 MB. FIX-05 |
+| `/hoi-nghi/cac-nam-truoc` trên Vercel | chưa kiểm | Rủi ro 500 | Đọc file `public/` bằng `fs` lúc runtime. FIX-07 |
+
+Bổ sung vào mục “Chưa kiểm thử” (§5):
+- Đăng xuất qua trình duyệt; thông báo lỗi phân quyền với tài khoản editor/viewer.
+- Kiểm quyền publish với tài khoản editor (SEC-02).
+- Hiển thị ngày giờ trên Vercel (múi giờ UTC) cho tin tức và liên hệ (DATA-02, DATA-08).
+- Link nội bộ toàn site (chưa có link checker trước FIX-00).

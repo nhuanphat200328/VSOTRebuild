@@ -5,7 +5,10 @@ VSOT Website Rebuild — Tài liệu kỹ thuật trung tâm
 
 Cập nhật lần đầu : 2026-11-20
 Người cập nhật   : AI Coding Agent
-Trạng thái       : Phase 0–3 hoàn tất; Phase 4 nền tảng + public programme + admin login
+Trạng thái       : Phase 0–3 hoàn tất; Phase 4–7 phần lớn (public programme, CMS Pages/News/
+                   Media/Contacts/Users, Programme Builder cơ bản, archive legacy).
+                   Review 2026-11-20: xem REVIEW_2026-11-20.md, PLAN_01_FIX_BACKLOG.md,
+                   PLAN_02_ROADMAP.md, AGENTS.md.
 Quy ước          : [DONE] [IN PROGRESS] [TODO] [BLOCKED] [UNKNOWN]
 
 Tài liệu này KHÔNG chứa mật khẩu, API key, token hoặc nội dung .env.local.
@@ -74,10 +77,12 @@ Chi tiết: SYSTEM_ARCHITECTURE.md, SITEMAP.md.
 
 D. BACKEND
 --------------------------------------------------------------------------------
-[DONE] Server action login. [TODO] Mutation admin khác.
-[PARTIAL] /api/health, /api/auth/signout, /api/bootstrap-super-admin.
+[DONE] Server action login + mutation admin (pages, news, media, contacts, users, programme).
+[OPEN] Mutation admin dùng service role → RLS/trigger không áp dụng (SEC-01).
+[DONE] /api/health, /api/auth/signout, /api/bootstrap-super-admin (đã vô hiệu: không còn secret).
+[BUG] /api/auth/signout redirect 307 tới /vi (404), fallback localhost (BUG-04).
 [DONE] Contact form server action + insert RLS (chưa có admin inbox/email).
-[TODO] /api/search, admin contact inbox.
+[DONE] Admin contact inbox (/admin/contacts). [TODO] /api/search, rate limit contact.
 [DONE] Locale + session refresh + admin guard.
 [DONE] Supabase Auth client/server; public signup bị chặn bởi trigger 0013.
 [TODO] UI mời tài khoản, reset password.
@@ -120,7 +125,7 @@ Roles: super_admin, admin, editor, viewer.
 Scope: global hoặc theo conference (user_roles.conference_id).
 Bootstrap: Method B, endpoint server-only, secret env, chỉ khi chưa có super_admin,
            transaction + advisory lock, audit, vô hiệu sau khi dùng.
-[TODO] Triển khai bootstrap + test.
+[DONE] Bootstrap đã chạy 2026-11-20, Super Admin tồn tại, secret đã xóa. Gỡ endpoint: ROADMAP R3.4.
 
 G. PROGRAMME BUILDER
 --------------------------------------------------------------------------------
@@ -138,8 +143,8 @@ H. GITHUB
 --------------------------------------------------------------------------------
 Repo    : https://github.com/nhuanphat200328/VSOTRebuild
 Branch  : main (production), ai-rebuild (development)
-Local   : chưa có repo (2026-11-20); chưa có remote local.
-Remote  : git ls-remote trả 0 ref → repo có thể trống.
+Local   : D:\VSOT REBUILD, branch ai-rebuild (đã init, có remote origin).
+Remote  : origin/ai-rebuild (HEAD 97c48c1 tại thời điểm review 2026-11-20).
 CLI     : gh chưa cài.
 Quy trình:
   1. git init tại "2027 demo".
@@ -147,11 +152,12 @@ Quy trình:
   3. Commit rõ ràng, không commit .env.local.
   4. Push branch ai-rebuild để tạo Preview.
   5. Không force push, không push main khi chưa được duyệt.
-[TODO] Khởi tạo repo + commit đầu tiên.
+[DONE] Khởi tạo repo + commit đầu tiên (231af4e). Repo đang PUBLIC — xem SECURITY_ROTATION_CHECKLIST §3.
 
 I. VERCEL
 --------------------------------------------------------------------------------
-Project : [UNKNOWN] chưa kiểm tra do chưa có quyền/CLI.
+Project : đã deploy được (vercel.json framework=nextjs); Preview bật SSO Protection →
+          chưa kiểm thử được qua trình duyệt công khai (xem PLAN_01 D6).
 CLI     : chưa cài; có thể dùng npx vercel.
 Production branch: [UNKNOWN] — giả định main.
 Quy tắc  : chỉ Preview; không đổi domain/Production khi chưa duyệt.
@@ -170,6 +176,7 @@ Lint                 : npm run lint
 Typecheck            : npm run typecheck
 Test unit            : npm run test        (khi đã cấu hình)
 Test e2e             : npm run test:e2e    (khi đã cấu hình)
+Smoke + link check   : node scripts/smoke.mjs http://localhost:3100   (tạo ở FIX-00)
 Supabase CLI         : npx supabase --version
 Migration (local)    : python scripts/apply_migrations.py --apply (nếu có)
 Import 2026          : $env:PYTHONPATH=...; python scripts/import_2026.py
@@ -218,39 +225,48 @@ K. CHANGE LOG
            |         | Chưa có CMS CRUD, contact form, legacy archive, search page.
            |         | Chưa tạo Super Admin (cần người dùng chạy bootstrap).
 
+2026-11-20 | Review  | Review tĩnh toàn bộ mã + tài liệu (không chạy build/test).
+           |         | Phát hiện: /vi, /en 404 nhưng còn link; /vi/hoi-nghi/cac-nam-truoc 404;
+           |         | shared header link tương đối; signout redirect sai; upload >1MB lỗi;
+           |         | hardcode năm 2026; service role bỏ qua RLS; thiếu kiểm publish.
+           |         | Tạo AGENTS.md, CLAUDE.md, REVIEW_2026-11-20.md, PLAN_01_FIX_BACKLOG.md,
+           |         | PLAN_02_ROADMAP.md; cập nhật README, TESTING_REPORT, các tài liệu thiết kế.
 
-L. CURRENT IMPLEMENTATION SNAPSHOT (2026-11-20)
+
+L. CURRENT IMPLEMENTATION SNAPSHOT (2026-11-20, cập nhật theo review)
 --------------------------------------------------------------------------------
 Routes:
-  /                                      redirect /vi
-  /[locale]                              home vi/en
+  /                                      307 → /legacy/2026/index.html (VSOT_LEGACY_2026_URL)
+  /[locale]                              KHÔNG có page → 404 (BUG-01; FIX-01 → redirect)
   /[locale]/hoi-nghi                     conference list
-  /[locale]/hoi-nghi/2026                conference landing
-  /[locale]/hoi-nghi/2026/chuong-trinh   List/Grid/Table + inline filter
-  /[locale]/hoi-nghi/2026/chuong-trinh/tong-quan
-  /[locale]/hoi-nghi/2026/phien/[id]     session detail
-  /[locale]/hoi-nghi/2026/dien-gia       faculty list
-  /[locale]/hoi-nghi/2026/dien-gia/[slug] profile
-  /[locale]/lien-he                      contact form
+  /[locale]/hoi-nghi/[year]              conference landing (year = conferences.slug)
+  /[locale]/hoi-nghi/[year]/chuong-trinh List/Grid/Table + inline filter
+  /[locale]/hoi-nghi/[year]/chuong-trinh/tong-quan
+  /[locale]/hoi-nghi/[year]/phien/[id]   session detail
+  /[locale]/hoi-nghi/[year]/dien-gia     faculty list
+  /[locale]/hoi-nghi/[year]/dien-gia/[slug] profile
+  /[locale]/lien-he                      contact form (insert DB, honeypot)
   /[locale]/dang-nhap                    admin login
-  /admin/dashboard                       counts (service role, guarded)
-  /admin/contacts                        contact inbox (contact.read)
-  /admin/pages, /admin/pages/new, /admin/pages/[id]  CMS Pages
-  /admin/news, /admin/news/categories, /admin/news/[id]
-  /admin/media                         media manager
-  /admin/users                         user management
-  /[locale]/[slug]                     public content page
+  /[locale]/[slug]                       public CMS page
   /[locale]/tin-tuc, /[locale]/tin-tuc/[slug]  public news
-  /[locale]/hoi-nghi/cac-nam-truoc  archive list
-  /legacy/2026/index.html            preserved VSOT 2026 site
-  /archive/2023/...pdf               local archive document
+  /hoi-nghi/cac-nam-truoc                archive list (NGOÀI [locale]; shared HTML header/footer)
+  /legacy/{2018,2019,2021,2022,2023,2025,2026}/...  preserved legacy sites (static)
+  /archive/2023/...pdf                   local archive document
+  /admin/dashboard                       counts (service role, guarded)
+  /admin/conferences, /admin/conferences/[id]/programme(/new|/[sessionId])  Programme Builder
+  /admin/contacts                        contact inbox (contact.read/update)
+  /admin/pages, /admin/pages/new, /admin/pages/[id]  CMS Pages
+  /admin/news, /admin/news/new, /admin/news/[id], /admin/news/categories
+  /admin/media                           media manager (upload ≤1MB thực tế, BUG-05)
+  /admin/users                           user management (create, role, ban)
   /api/health
-  /api/bootstrap-super-admin
-  /api/auth/signout
+  /api/bootstrap-super-admin             503 (secret đã xóa)
+  /api/auth/signout                      POST
 Data: 2026 imported from legacy programme.js; 65 sessions, 255 presentations.
 Security: RLS 94 policies, signup blocked by trigger, bootstrap guard, admin guard.
-Not implemented: CMS CRUD, Programme Builder UI, media upload, users UI,
-legacy archive, standalone search, 2027 content.
+Not implemented: conference/date/room CRUD, people admin + assignments, delete session/
+presentation, settings, audit viewer, invite by email, standalone search, automated tests,
+2027 content. Known bugs: REVIEW_2026-11-20.md.
 ================================================================================
 GHI CHÚ BẢO MẬT
 --------------------------------------------------------------------------------

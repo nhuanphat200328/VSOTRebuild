@@ -5,6 +5,11 @@
 - PostgreSQL: 17.12
 - Trạng thái kiểm tra: `public` **0 bảng**, `0 policy`, `auth.users` **0**,
   `storage.buckets` **0**, chưa có `supabase_migrations`.
+- **Hiện trạng (2026-11-20, sau migrations 0001..0016):** 35 bảng public, 94 policy RLS, 3 bucket,
+  4 role, 31 permission, 1 Super Admin, dữ liệu 2026 đã import. Dòng “0 bảng” phía trên là kết quả audit ban đầu.
+- Khác biệt với thiết kế cần biết: `user_roles.conference_id` **chưa có FK** tới `conferences`; `has_permission()`
+  **không xét** phạm vi hội nghị; RLS chưa phân biệt quyền publish (xem `REVIEW_2026-11-20.md` SEC-01, FIX-15).
+- Thêm bảng mới: phải `enable row level security` + policy trong cùng migration (loop bật RLS ở 0009 chỉ chạy một lần).
 - Extensions có sẵn: `pgcrypto`, `uuid-ossp`, `pg_stat_statements`,
   `supabase_vault`, `plpgsql`.
 

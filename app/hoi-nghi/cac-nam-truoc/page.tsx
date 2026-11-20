@@ -16,7 +16,7 @@ export default function ArchivePage() {
     <div className="flex min-h-screen flex-col">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
       {/* eslint-disable-next-line @next/next/no-css-tags */}
-      <link rel="stylesheet" href="/legacy/shared/header-footer-2026.css" />
+      <link rel="stylesheet" href="/legacy/shared/header-footer-2026.css?v=20261120-4" />
       <div dangerouslySetInnerHTML={{ __html: header }} />
       <main className="flex-1 bg-surface pb-20">
         <Container className="py-10">

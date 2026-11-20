@@ -2338,3 +2338,47 @@ a.news-box:focus-visible {
     .header-menu, .header-button, .select-language { display: none !important; }
     .hamburger-menu { display: flex !important; align-items: center; justify-content: flex-end; justify-self: end; margin: 0; }
 }
+
+/* Shared Header typography isolation from legacy CSS */
+.full-header a,
+.full-header a:visited,
+.full-header .nav-link,
+.full-header .submenu a,
+.mobile-nav > a,
+.mobile-nav details > summary {
+    text-decoration: none !important;
+}
+.full-header .nav-link {
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    color: var(--color-darkest) !important;
+}
+.full-header .submenu a {
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    color: var(--color-darkest) !important;
+}
+.mobile-nav > a,
+.mobile-nav details.mobile-nav-archive > summary {
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 1.125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    color: var(--color-darkest) !important;
+}
+.mobile-nav details.mobile-nav-archive > a {
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+}
+.full-header .nav-link:hover,
+.full-header .nav-link:focus,
+.full-header .submenu a:hover,
+.full-header .submenu a:focus {
+    color: var(--color-primary) !important;
+}
+.full-header .header-logo img { height: 3.25rem !important; width: auto !important; }

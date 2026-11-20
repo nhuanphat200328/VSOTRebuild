@@ -166,3 +166,19 @@
 - Đã thêm `vercel.json` header `Cache-Control: no-store, max-age=0, must-revalidate` cho `/legacy/*.html`.
 - Đã đồng bộ mobile menu mới + archive details trên tất cả trang.
 - Không thể xác minh Chrome Android thật do không có thiết bị/không đọc được screenshot; cần mở lại URL sau deploy hoặc dùng tab ẩn danh để loại cache cũ.
+
+
+## 15. Đồng bộ typography Header 2018–2021
+
+- Nguyên nhân: CSS cũ `css.css` của 2018/2019/2021 có selector `a`/`#main` gạch chân và font-size nhỏ, ghi đè Shared Header vì specificity cao hơn.
+- Đã thêm isolation trong `header-footer-2026.css` + `2026/style/style.css`:
+  - `.full-header a`, `.mobile-nav a`, `.mobile-nav summary`: `text-decoration:none !important`.
+  - `.nav-link`: font Roboto, 1.05rem, weight 400, line-height 1.4.
+  - `.submenu a`: 1rem.
+  - mobile link/summary: 1.125rem.
+  - hover/focus: màu primary, không gạch chân.
+  - logo giữ cao 3.25rem, width auto.
+- Bump cache CSS `?v=20261120-4` toàn legacy + archive.
+- Áp dụng cho 2018/2019/2021/2022/2023/2025/2026.
+- Đã kiểm tra HTTP các trang: 200; CSS chứa rule isolation.
+- Chưa thể kiểm tra screenshot/device thật; cần xác nhận trên Preview.

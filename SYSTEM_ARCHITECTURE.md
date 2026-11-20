@@ -213,3 +213,28 @@ audit.read
 8. Legacy archive.
 9. Testing.
 10. Preview deployment.
+
+---
+
+## 12. ĐỘ LỆCH GIỮA THIẾT KẾ VÀ MÃ THỰC TẾ (review 2026-11-20)
+
+Thiết kế ở §2–§10 là định hướng; mã hiện tại khác ở các điểm sau (agent phải theo mã, cập nhật mục này khi thay đổi):
+
+| Thiết kế | Thực tế | Ghi chú / kế hoạch |
+|---|---|---|
+| Route group `(public)`, `(auth)` | Không dùng group: `app/[locale]/...`, `app/admin/...`, `app/hoi-nghi/cac-nam-truoc` | ROADMAP R2.3 nếu cần nhiều root layout |
+| `/` redirect `/vi` theo cookie | `/` → `/legacy/2026/index.html`; `/vi` không có page (404) | FIX-01 |
+| `messages/vi.json`, `en.json` | `lib/i18n/dictionary.ts` + chuỗi `locale === "en" ? …` rải rác | ROADMAP R2.4 |
+| `components/ui` (Button, Card, Modal…) | Chỉ có `Container` | ROADMAP R2.4 |
+| `api/contact`, `api/search` | Contact dùng Server Action; chưa có search API | — |
+| Kiểm quyền ở middleware + server action + **RLS** | Middleware chỉ kiểm đăng nhập; action kiểm `requirePermission`; mutation dùng **service role ⇒ RLS/trigger không áp dụng** | SEC-01 → FIX-15, ROADMAP R3.3 |
+| Public đọc qua RLS (anon) | Dùng server client **có cookie** ⇒ admin đang đăng nhập thấy cả bản draft lồng | FIX-16 |
+| Cache theo tag (`revalidateTag`) | Root layout gọi `headers()` ⇒ mọi trang dynamic; action dùng `revalidatePath("/", "layout")` | ROADMAP R2.2–R2.3 |
+| Audit log mọi mutation | Chỉ users + bootstrap | FIX-13 |
+| Contact: Zod + honeypot + rate limit | Zod + honeypot, **chưa** rate limit | FIX-12 |
+| Media: giới hạn mime/size | 5 MB trong code nhưng Server Action chỉ nhận 1 MB; cho phép SVG | FIX-05 |
+| Header bảo mật CSP/HSTS… | Chưa cấu hình (chỉ có Cache-Control cho `/legacy/*.html` trong `vercel.json`) | ROADMAP R3.2 |
+| `supabase/types/database.types.ts` | Chưa generate | ROADMAP R2.1 |
+| `tests/e2e`, `tests/unit` | Chưa có | FIX-00, ROADMAP R1 |
+| `middleware.ts` | Next 16 đã đổi tên thành `proxy.ts` (middleware.ts vẫn chạy nhưng deprecated) | FIX-24 |
+| Migration bằng Supabase CLI | Script tự viết `scripts/apply_migrations.py` + bảng `supabase_migrations.schema_migrations` tự tạo | Không trộn với `supabase db push` khi chưa đối chiếu format; FIX-19 |

@@ -22,7 +22,7 @@ export const archiveConferences: ArchiveConference[] = [
   {
     year: 2023,
     name: "Chương trình hội nghị VSOT 2023",
-    href: "/archive/2023/chuong-trinh-vsot-2023.pdf",
+    href: "/legacy/2023/index.html",
     kind: "document",
   },
   {

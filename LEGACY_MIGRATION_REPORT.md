@@ -11,7 +11,7 @@
 |---:|---|---|---|
 | 2026 | **Migrated** | `/legacy/2026/index.html` | Public-only, root redirect |
 | 2025 | **Migrated with limitations** | `/legacy/2025/index.html` | Ảnh/JS tự host; PDF lớn/video chưa copy; một số link Google Drive |
-| 2023 | **Migrated** | `/archive/2023/chuong-trinh-vsot-2023.pdf` | Chỉ có PDF |
+| 2023 | **Migrated** | `/legacy/2023/index.html` | Wrapper header/footer + PDF |
 | 2022 | **Content restored** | `/legacy/2022/index.html` | Bản phục hồi UTF-8 + bản gốc full |
 | 2022 (PHP) | **Backend pending** | — | `chuongtrinhhoinghi2022` cần MySQL/PHP |
 | 2021 | **Backend pending** | — | PHP/MySQL |
@@ -55,7 +55,22 @@
 - PDF: chương trình final, tóm tắt, abstract.
 - Hạn chế: bản full gốc vẫn còn ký tự `?` do mất dữ liệu nguồn.
 
-## 3. Không phụ thuộc domain cũ
+## 3. Header/footer dùng chung
+
+- 2022, 2025, 2023 dùng `public/legacy/shared/legacy-shell.css` + `legacy-shell.js`.
+- Logo → `/legacy/2026/index.html`.
+- Menu/dropdown link nội bộ 2026/2025/2022/2023.
+- Footer dùng thông tin liên hệ VSOT 2026.
+- 2026 giữ header/footer gốc, chỉ thêm dropdown.
+
+## 4. Database
+
+- Không tạo database giả.
+- 2026 dùng JSON/static; 2025/2023/2022 dùng tài nguyên tĩnh/PDF/DOCX.
+- 2018/2019/2021/2022 PHP cần DB dump + PHP/MySQL; chưa có trong nguồn.
+- Không phục hồi chức năng login/search/admin khi thiếu dữ liệu.
+
+## 5. Không phụ thuộc domain cũ
 
 - Archive không còn link tới `vsot.com.vn` cho 2022/2023/2025/2026.
 - 2026 root dùng bản local.
@@ -65,7 +80,7 @@
 - 2018/2019/2021 chưa migrate; archive hiển thị trạng thái chờ backend, **không** chuyển sang domain cũ.
 - Không có URL ổ D.
 
-## 4. Kiểm thử
+## 6. Kiểm thử
 
 | Mục | Kết quả |
 |---|---|
@@ -82,7 +97,7 @@
 | `/vi/hoi-nghi/cac-nam-truoc` | 200, hiển thị 2025/2023/2022 + pending |
 | `typecheck`, `lint`, `build` | PASS |
 
-## 5. Chưa hoàn thành / giới hạn
+## 7. Chưa hoàn thành / giới hạn
 
 - **2018, 2019, 2021, 2022 PHP**: cần DB dump + PHP/MySQL hosting hoặc snapshot HTML đầy đủ.
 - **2025**: chưa copy PDF lớn/video; link Google Drive vẫn bên thứ ba.

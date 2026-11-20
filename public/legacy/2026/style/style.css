@@ -2305,3 +2305,13 @@ a.news-box:focus-visible {
 .nav-item--archive { flex: 0 0 auto; }
 .nav-item--archive .nav-link { font-size: inherit; white-space: nowrap; }
 .header-menu nav { gap: 1.3rem; }
+
+/* Mobile header: keep logo left, hamburger pinned right */
+@media (max-width: 1104px) {
+    .inner-header .hamburger-menu {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}

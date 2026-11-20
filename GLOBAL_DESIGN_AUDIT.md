@@ -116,3 +116,13 @@
 - Sticky bắt đầu từ timeline header (chứa dòng “Kéo ngang hoặc dùng mũi tên…”), không còn giữ bộ lọc.
 - Không đổi bố cục, chiều cao bảng, filter, nút mũi tên hay kéo ngang.
 - Chưa kiểm tra cuộn thực tế bằng trình duyệt; đã kiểm tra CSS/JS.
+
+
+## 11. Header mobile và tiêu đề
+
+- Thêm CSS `@media (max-width:1104px) .inner-header .hamburger-menu { margin-left:auto; display:flex; align-items:center; justify-content:flex-end; }`.
+- Logo giữ trái; hamburger sát phải; không dùng position:absolute.
+- Áp dụng trong `shared/header-footer-2026.css` và `2026/style/style.css`.
+- Logo link thêm `aria-label`/`title` “Hội Ghép tạng Việt Nam”; logo vẫn trỏ `/legacy/2026/index.html`.
+- Header 2026 không có tiêu đề chữ riêng; tiêu đề nhận diện là logo + alt/title.
+- Chưa kiểm tra mobile bằng trình duyệt thật.

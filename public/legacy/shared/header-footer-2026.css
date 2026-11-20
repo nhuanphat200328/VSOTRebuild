@@ -482,3 +482,13 @@ p {
 .footer a:hover, .footer a:focus { text-decoration: underline !important; }
 .footer .socials__social:hover, .footer .socials__social:focus { text-decoration: none !important; }
 .footer .footer-list li { text-decoration: none !important; }
+
+/* Mobile header: keep logo left, hamburger pinned right */
+@media (max-width: 1104px) {
+    .inner-header .hamburger-menu {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}

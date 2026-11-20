@@ -1,4 +1,4 @@
-# SECURITY_ROTATION_CHECKLIST.md
+﻿# SECURITY_ROTATION_CHECKLIST.md
 
 - Ngày: 2026-11-20
 - Lý do: credential đã được gửi qua chat/không còn được coi là bí mật.
@@ -13,7 +13,7 @@
 - [ ] Cập nhật `.env.local` và Environment Variables trên Vercel.
 - [ ] Không dùng lại `.env.local` hoặc `config.php` từ PrototypeClone.
 - [ ] Tắt public signup trong Supabase Dashboard (`Auth > Providers > Email`).
-- [ ] Xóa `SUPER_ADMIN_BOOTSTRAP_SECRET` khỏi môi trường sau khi tạo Super Admin.
+- [x] Xóa `SUPER_ADMIN_BOOTSTRAP_SECRET` khỏi môi trường sau khi tạo Super Admin.\n- [x] Tạo Super Admin đầu tiên (email người dùng cấp).
 - [ ] Kiểm tra `git grep` không có secret trước khi push.
 - [ ] Kiểm tra Vercel build logs không chứa secret.
 
@@ -31,3 +31,4 @@
 - Rotate JWT secret sẽ làm mọi token cũ mất hiệu lực.
 - Rotate anon key sẽ làm client cũ lỗi cho đến khi deploy key mới.
 - Không commit file chứa credential; `.gitignore` đã chặn `.env*`.
+

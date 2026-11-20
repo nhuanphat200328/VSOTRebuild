@@ -43,7 +43,7 @@
 | Storage buckets | 3 |
 | Roles | 4 |
 | Permissions | 31 |
-| Migrations | 15 |
+| Migrations | 15 |\n| Auth users | 1 (Super Admin) |
 | Conference 2026 | 1 |
 | Dates | 5 |
 | Rooms | 6 |
@@ -55,7 +55,7 @@
 
 ## 4. Chưa kiểm thử
 
-- Đăng nhập thật / tạo Super Admin (chưa có email/password).
+- Đăng nhập UI thật (chưa test qua trình duyệt); password grant Supabase trả 200.\n- Super Admin đã tạo; bootstrap secret đã xóa khỏi `.env.local`.
 - CMS CRUD (chưa triển khai).
 - Programme Builder UI (chưa triển khai).
 - Contact form: đã có UI + server action + insert RLS; chưa test qua trình duyệt, chưa có admin inbox/email.
@@ -70,6 +70,7 @@
 - Credential đã chia sẻ công khai → rotate trước Production.
 - `auth.disable_signup` trên Dashboard vẫn `false`; trigger DB đang chặn,
   nhưng nên tắt ở cấu hình Auth.
-- Chưa có E2E auth; middleware/admin guard mới test ở mức redirect.
+- Chưa có E2E auth; middleware/admin guard mới test ở mức redirect.\n- Vercel Preview chưa tạo vì CLI đang logged out.
+
 
 

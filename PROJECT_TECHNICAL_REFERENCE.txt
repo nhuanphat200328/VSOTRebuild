@@ -184,7 +184,7 @@ K. CHANGE LOG
            |         | Phát hiện anon REST 401; cần xử lý.
 2026-11-20 | Phase 4 | [IN PROGRESS] Scaffold Next.js/Tailwind/Supabase.
 
-2026-11-20 | Phase 4 | [DONE] Scaffold Next.js 16.4.6 + React 19.3.1 +
+2026-11-20 | Auth    | [DONE] Tạo Super Admin; password grant 200; xóa bootstrap secret.\n2026-11-20 | Git     | [DONE] init ai-rebuild; commit 231af4e; push origin.\n2026-11-20 | Vercel  | [BLOCKED] CLI logged out; chưa có Preview deployment.\n2026-11-20 | Phase 4 | [DONE] Scaffold Next.js 16.4.6 + React 19.3.1 +
            |         | Tailwind 4.3.5 + TypeScript 5.9.3; npm install.
            |         | Public: home vi/en, conference list/landing, programme
            |         | List/Grid/Table, At a glance, session detail, Faculty
@@ -228,6 +228,7 @@ GHI CHÚ BẢO MẬT
 - Bootstrap secret chỉ dùng một lần; xoá khỏi env sau khi tạo Super Admin.
 - Nếu phát hiện secret trong repo/log: thu hồi và rotate ngay.
 ================================================================================
+
 
 
 

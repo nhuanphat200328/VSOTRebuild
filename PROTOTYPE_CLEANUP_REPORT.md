@@ -1,4 +1,4 @@
-# PROTOTYPE_CLEANUP_REPORT.md — VSOT Legacy Cleanup (Phase 1)
+﻿# PROTOTYPE_CLEANUP_REPORT.md — VSOT Legacy Cleanup (Phase 1)
 
 - Ngày thực hiện: 2026-11-20
 - Phạm vi: `D:\Philao\code project\VSOT\PrototypeClone`
@@ -20,7 +20,7 @@ Kiểm tra lại sau xóa:
 - `Thumbs.db` còn lại: **0**
 - `.pyc` còn lại: **0**
 
-Manifest đầy đủ: `PROTOTYPE_ASSET_MANIFEST.csv` (9.304 dòng, gồm path, size, ngày sửa, SHA-256).
+Manifest đầy đủ: `PROTOTYPE_ASSET_MANIFEST.csv` (9.304 dòng, gồm path, size,\nngày sửa, SHA-256). **File này giữ local, không commit vì chứa đường dẫn legacy\ncó thể chứa tên cá nhân.**
 
 ---
 
@@ -161,3 +161,4 @@ Từ sau báo cáo này:
 3. Quarantine/scan `zinzzloD` và `error_log` ngoài phạm vi archive public.
 4. Kiểm tra `hoinghi2026` trên trình duyệt thật sau khi mount.
 5. Phase 2: content inventory & mapping dữ liệu 2026/2027.
+

@@ -39,8 +39,8 @@ B. PROJECT STRUCTURE
 [DONE] D:\Philao\code project\VSOT\2027 demo
   PROJECT_INITIAL_AUDIT.md          Audit môi trường (Phase 0)
   PROTOTYPE_CLEANUP_REPORT.md       Báo cáo dọn dẹp PrototypeClone
-  PROTOTYPE_ASSET_MANIFEST.csv      Manifest 9.304 file còn lại + SHA-256
-  PROTOTYPE_BROKEN_LINKS.csv        Link nội bộ thiếu (có false positive)
+  PROTOTYPE_ASSET_MANIFEST.csv      (local only, not committed — chứa path legacy)
+  PROTOTYPE_BROKEN_LINKS.csv        (local only, not committed)
   CONTENT_INVENTORY.md              Kiểm kê nội dung
   SITEMAP.md                        Sitemap public/admin
   SYSTEM_ARCHITECTURE.md            Kiến trúc hệ thống
@@ -228,6 +228,7 @@ GHI CHÚ BẢO MẬT
 - Bootstrap secret chỉ dùng một lần; xoá khỏi env sau khi tạo Super Admin.
 - Nếu phát hiện secret trong repo/log: thu hồi và rotate ngay.
 ================================================================================
+
 
 
 

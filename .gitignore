@@ -41,3 +41,7 @@ test-results/
 # misc
 *.tsbuildinfo
 next-env.d.ts
+
+# Legacy audit exports (may contain personal names in file paths)
+PROTOTYPE_ASSET_MANIFEST.csv
+PROTOTYPE_BROKEN_LINKS.csv

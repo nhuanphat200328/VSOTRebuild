@@ -608,7 +608,7 @@
         var f = document.querySelector('.prog-filters');
         var mobile = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
         var h = (!mobile && f) ? (f.offsetHeight || 0) : 0;
-        document.documentElement.style.setProperty('--prog-filters-h', h + 'px');
+        document.documentElement.style.setProperty('--prog-filters-h', '0px');
     }
 
     // When a search yields results, bring the first matching block near the top

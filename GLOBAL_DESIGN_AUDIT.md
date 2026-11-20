@@ -105,3 +105,14 @@
 - Đã giảm nav gap từ 1.75rem xuống 1.3rem để đủ chỗ, không tăng chiều cao Header.
 - Kiểm tra HTTP: archive 200, logo 200, header shared 200.
 - Chưa kiểm tra Network/Console và hover trực quan bằng trình duyệt; mới xác minh HTTP.
+
+
+## 10. Sticky trang chương trình 2026
+
+- Nguyên nhân: `.prog-filters` có `position: sticky; top: 5rem; z-index: 40` trên desktop.
+- Đã đổi `.prog-filters` sang `position: static; top: auto; z-index: auto`.
+- `.tl-sticky-head` đổi `top: calc(5rem + var(--prog-filters-h, 0px))` → `top: 5rem`.
+- `programme.js` set `--prog-filters-h` = `0px`.
+- Sticky bắt đầu từ timeline header (chứa dòng “Kéo ngang hoặc dùng mũi tên…”), không còn giữ bộ lọc.
+- Không đổi bố cục, chiều cao bảng, filter, nút mũi tên hay kéo ngang.
+- Chưa kiểm tra cuộn thực tế bằng trình duyệt; đã kiểm tra CSS/JS.

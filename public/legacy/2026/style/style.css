@@ -1198,10 +1198,10 @@ a.news-box:focus-visible {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     margin-bottom: 1.25rem;
-    /* keep the search bar / filters in view while scrolling the results */
-    position: sticky;
-    top: 5rem;
-    z-index: 40;
+    /* filters scroll with the page; only the timeline hint/header is sticky */
+    position: static;
+    top: auto;
+    z-index: auto;
 }
 
 .prog-filter-group {
@@ -1286,9 +1286,8 @@ a.news-box:focus-visible {
    the body (set via transform in wireScrollNav). */
 .tl-sticky-head {
     position: sticky;
-    /* sits below the site header AND the sticky filters above it (the filter
-       height is published as --prog-filters-h by programme.js) */
-    top: calc(5rem + var(--prog-filters-h, 0px));
+    /* sits directly below the site header; filters are not sticky */
+    top: 5rem;
     z-index: 30;
     display: flex;
     flex-direction: column;

@@ -83,7 +83,7 @@ Chi tiết: SYSTEM_ARCHITECTURE.md, CMS_MODULES.md.
 E. DATABASE
 --------------------------------------------------------------------------------
 [DONE] Audit ban đầu: public schema trống, auth.users=0, storage.buckets=0.
-[DONE] Migrations 0001..0015 đã áp dụng (15 bản ghi schema_migrations):
+[DONE] Migrations 0001..0016 đã áp dụng (16 bản ghi schema_migrations):
   0001 enums/extensions
   0002 RBAC (profiles/roles/permissions/user_roles/audit)
   0003 media/settings
@@ -96,7 +96,7 @@ E. DATABASE
   0010 seed 4 roles + 31 permissions
   0011 storage buckets (media-public public, documents/legacy private)
   0012 migration tracking
-  0013 auth hardening (block public signup, bootstrap function)\n  0014 grant insert contact_requests cho anon\n  0015 guard Super Admin profile/role
+  0013 auth hardening (block public signup, bootstrap function)\n  0014 grant insert contact_requests cho anon\n  0015 guard Super Admin profile/role\n  0016 cho phép nhiều presentation legacy_pid NULL
 [DONE] Import 2026:
   conference 1, dates 5, rooms 6, sessions 65, presentations 255,
   people 245, session_people 127, presentation_people 221.
@@ -228,6 +228,7 @@ GHI CHÚ BẢO MẬT
 - Bootstrap secret chỉ dùng một lần; xoá khỏi env sau khi tạo Super Admin.
 - Nếu phát hiện secret trong repo/log: thu hồi và rotate ngay.
 ================================================================================
+
 
 
 

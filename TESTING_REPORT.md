@@ -43,7 +43,7 @@
 | Storage buckets | 3 |
 | Roles | 4 |
 | Permissions | 31 |
-| Migrations | 15 |\n| Auth users | 1 (Super Admin) |
+| Migrations | 16 |\n| Auth users | 1 (Super Admin) |
 | Conference 2026 | 1 |
 | Dates | 5 |
 | Rooms | 6 |
@@ -70,7 +70,8 @@
 - Credential đã chia sẻ công khai → rotate trước Production.
 - `auth.disable_signup` trên Dashboard vẫn `false`; trigger DB đang chặn,
   nhưng nên tắt ở cấu hình Auth.
-- Chưa có E2E auth; middleware/admin guard mới test ở mức redirect.\n- Vercel Preview chưa tạo vì CLI đang logged out.
+- Chưa có E2E auth; middleware/admin guard mới test ở mức redirect.\n- Vercel deployment báo success (commit dd589c3) nhưng Preview đang bật SSO protection.\n- Admin Programme Builder mới test render; chưa test submit form qua browser.
+
 
 
 

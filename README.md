@@ -81,7 +81,7 @@ Sau khi thành công:
 - `/vi/hoi-nghi/2026/phien/[id]`
 - `/vi/hoi-nghi/2026/dien-gia`, `/dien-gia/[slug]`
 - `/vi/lien-he` (contact form)\n- `/vi/dang-nhap`
-- `/admin`, `/admin/dashboard`
+- `/admin`, `/admin/dashboard`\n- `/admin/conferences`, `/admin/conferences/[id]/programme` (Programme Builder)
 - `/api/health`, `/api/bootstrap-super-admin`
 
 ## Trạng thái
@@ -93,6 +93,7 @@ Chưa có: CMS CRUD đầy đủ, Programme Builder UI, contact form, legacy arc
 trang search riêng, upload media, quản lý người dùng.
 
 Không có nội dung giả. Phần thiếu hiển thị "Nội dung đang được cập nhật".
+
 
 
 

@@ -13,10 +13,10 @@ import type { getDictionary } from "@/lib/i18n/dictionary";
 type Dict = ReturnType<typeof getDictionary>;
 
 const navItems = [
-  { key: "home", href: "" },
-  { key: "about", href: "#gioi-thieu" },
+  { key: "home", href: "/legacy/2026/index.html" },
+  { key: "about", href: "/legacy/2026/gioi-thieu.html" },
   { key: "news", href: "/tin-tuc" },
-  { key: "conference", href: "/hoi-nghi" },
+  { key: "conference", href: "/legacy/2026/index.html" },
   { key: "contact", href: "/lien-he" },
 ] as const;
 
@@ -34,6 +34,8 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dict }) {
   parts[1] = otherLocale;
   const switchHref = parts.join("/") || `/${otherLocale}`;
   const archiveActive = pathname.startsWith("/legacy/") || pathname.includes("/cac-nam-truoc");
+  const hrefForNav = (href: string) =>
+    href.startsWith("/legacy/") ? href : `/${locale}${href}`;
 
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-white/95 backdrop-blur">
@@ -79,7 +81,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dict }) {
           {navItems.map((item) => (
             <Link
               key={item.key}
-              href={`/${locale}${item.href}`}
+              href={hrefForNav(item.href)}
               className="rounded-lg px-3 py-2 text-sm font-semibold text-ink-700 transition hover:bg-brand-50 hover:text-brand-700"
             >
               {dict.nav[item.key]}
@@ -142,7 +144,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dict }) {
             {otherLocale.toUpperCase()}
           </Link>
           <Link
-            href={`/${locale}/lien-he`}
+            href="/legacy/2026/lien-he.html"
             className="hidden rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 sm:inline-flex"
           >
             {dict.actions.contact}
@@ -168,7 +170,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: Dict }) {
           {navItems.map((item) => (
             <Link
               key={item.key}
-              href={`/${locale}${item.href}`}
+              href={hrefForNav(item.href)}
               onClick={() => setOpen(false)}
               className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink-700 hover:bg-brand-50"
             >

@@ -14,9 +14,9 @@
 | 2023 | **Migrated** | `/legacy/2023/index.html` | Wrapper header/footer + PDF |
 | 2022 | **Content restored** | `/legacy/2022/index.html` | Bản phục hồi UTF-8 + bản gốc full |
 | 2022 (PHP) | **Backend pending** | — | `chuongtrinhhoinghi2022` cần MySQL/PHP |
-| 2021 | **Backend pending** | — | PHP/MySQL |
-| 2019 | **Backend pending** | — | PHP/MySQL |
-| 2018 | **Backend pending** | — | PHP/MySQL |
+| 2021 | **Migrated with limitations** | `/legacy/2021/index.html` | Snapshot nội dung, PHP backend không chạy |
+| 2019 | **Migrated with limitations** | `/legacy/2019/index.html` | Snapshot + 26 trang text |
+| 2018 | **Migrated with limitations** | `/legacy/2018/index.html` | Snapshot + 26 trang text |
 | 2020 | Không có dữ liệu | — | Không có thư mục website |
 | 2024 | Không có dữ liệu | — | Không có thư mục website |
 
@@ -38,6 +38,12 @@
 ### 2023
 - PDF 640 KB tại `public/archive/2023/`.
 - Không có website HTML.
+
+### 2018 / 2019 / 2021
+- Snapshot HTML công khai + CSS + toàn bộ text1..text26 (2018/2019).
+- Trang con dùng shell header/footer chung.
+- Không chạy PHP/MySQL; chức năng login/search/admin cũ không phục hồi.
+- Nội dung có thể còn `?` do encoding database cũ.
 
 ### 2022 – phục hồi nội dung
 - Bản gốc `chuong-trinh-hoi-nghi-final.htm`:
@@ -77,7 +83,7 @@
 - 2025 dùng ảnh local.
 - 2022 dùng bản local.
 - 2023 dùng PDF local.
-- 2018/2019/2021 chưa migrate; archive hiển thị trạng thái chờ backend, **không** chuyển sang domain cũ.
+- 2018/2019/2021 đã snapshot local, **không** chuyển sang domain cũ.
 - Không có URL ổ D.
 
 ## 6. Kiểm thử
@@ -94,12 +100,12 @@
 | `/legacy/2025/pictures/01.jpg` | 200 |
 | `/legacy/2022/index.html` | 200 |
 | `/legacy/2022/files/chuong-trinh-final.pdf` | 200 |
-| `/vi/hoi-nghi/cac-nam-truoc` | 200, hiển thị 2025/2023/2022 + pending |
+| `/vi/hoi-nghi/cac-nam-truoc` | 200, hiển thị 2025/2023/2022/2021/2019/2018 |
 | `typecheck`, `lint`, `build` | PASS |
 
 ## 7. Chưa hoàn thành / giới hạn
 
-- **2018, 2019, 2021, 2022 PHP**: cần DB dump + PHP/MySQL hosting hoặc snapshot HTML đầy đủ.
+- **PHP backend 2018–2022**: snapshot nội dung đã có, nhưng login/search/admin cũ vẫn cần DB + PHP hosting nếu muốn phục hồi.
 - **2025**: chưa copy PDF lớn/video; link Google Drive vẫn bên thứ ba.
 - **2022**: bản full gốc còn `?` do mất byte; bản phục hồi từ DOCX là bản tóm tắt.
 - Preview Vercel bật SSO Protection.

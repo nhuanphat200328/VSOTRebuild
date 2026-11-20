@@ -32,6 +32,10 @@
 | `/admin/news`, `/admin/news/new`, `/admin/news/categories` | 200 |
 | `/admin/media`, `/admin/users` | 200 |
 | `/vi/tin-tuc` | 200 |
+| `/` | 307 → `/legacy/2026/index.html` |
+| `/legacy/2026/index.html` | 200 |
+| `/legacy/2026/chuong-trinh.html`, CSS/JS/PDF | 200 |
+| `/vi/hoi-nghi/cac-nam-truoc` | 200 |
 | `/vi/{slug}` (test page) | 200; test row đã xóa |
 | `/api/health` | 200 |
 | `/api/bootstrap-super-admin` sai secret | 401 |
@@ -68,7 +72,8 @@ Room/type/role filter cũng cập nhật ngay.
 ## 5. Chưa kiểm thử
 
 - Submit form qua trình duyệt thật (CMS Pages, Programme Builder, contact).
-- Legacy archive, people admin, settings UI.
+- People admin, settings UI.
+- Tự host 2018–2025 (hiện dùng hosting gốc; 2023 PDF local).
 - Media upload/user create chưa test submit (chỉ test render).
 - Legacy archive.
 - Visual regression, Lighthouse, accessibility audit, mobile browser thật.

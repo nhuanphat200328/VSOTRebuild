@@ -41,6 +41,12 @@ export default async function ConferencesPage({
             ? "VSOT annual scientific congresses and archived programmes."
             : "Hội nghị khoa học thường niên và chương trình các năm của Hội Ghép tạng Việt Nam."}
         </p>
+        <Link
+          href={`/${locale}/hoi-nghi/cac-nam-truoc`}
+          className="mt-4 inline-flex items-center gap-2 rounded-lg border border-line bg-white px-4 py-2.5 text-sm font-bold text-brand-700 hover:bg-surface"
+        >
+          {locale === "en" ? "Previous Conferences" : "Hội nghị các năm trước"}
+        </Link>
 
         {conferences.length === 0 ? (
           <p className="mt-10 rounded-xl border border-dashed border-line bg-white p-8 text-sm text-ink-500">

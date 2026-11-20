@@ -50,6 +50,11 @@ export function SiteFooter({
                 {dict.nav.conference}
               </Link>
             </li>
+            <li>
+              <Link className="hover:text-white" href={`/${locale}/hoi-nghi/cac-nam-truoc`}>
+                {locale === "en" ? "Previous Conferences" : "Hội nghị các năm trước"}
+              </Link>
+            </li>
           </ul>
         </nav>
 

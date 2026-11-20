@@ -198,6 +198,7 @@ K. CHANGE LOG
            |         | LƯU Ý: manifest vẫn tồn tại trong lịch sử commit 231af4e;
            |         | repo đang public. Cần chuyển private hoặc rewrite history.
 2026-11-20 | Vercel  | [BLOCKED] CLI logged out; chưa có Preview deployment.
+2026-11-20 | Archive | [DONE] Preserve 2026; root redirect; archive page.
 2026-11-20 | CMS     | [DONE] Pages + News + Media + Users modules.
            |         | Vercel deploy success; Preview vẫn SSO.
 2026-11-20 | CMS     | [DONE] Pages CRUD song ngữ + public /[locale]/[slug].
@@ -240,6 +241,9 @@ Routes:
   /admin/users                         user management
   /[locale]/[slug]                     public content page
   /[locale]/tin-tuc, /[locale]/tin-tuc/[slug]  public news
+  /[locale]/hoi-nghi/cac-nam-truoc  archive list
+  /legacy/2026/index.html            preserved VSOT 2026 site
+  /archive/2023/...pdf               local archive document
   /api/health
   /api/bootstrap-super-admin
   /api/auth/signout

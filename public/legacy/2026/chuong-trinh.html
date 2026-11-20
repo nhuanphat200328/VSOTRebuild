@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương trình khoa học - Hội ghép tạng Việt Nam 2026</title>
+    <meta name="description" content="Chương trình khoa học Hội nghị thường niên lần XI Hội ghép tạng Việt Nam, TP Đà Nẵng 2026: lịch trình theo ngày, hội trường, phiên và báo cáo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700&family=Roboto:wght@400;700&display=swap&subset=vietnamese" rel="stylesheet">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="icon" href="asset/logo1507104171.gif" type="image/gif">
+    <script src="https://kit.fontawesome.com/622a6a0f09.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="full-containter full-header">
+        <div class="inner-container inner-header">
+            <div class="header-logo"><a class="logo" href="index.html"><img src="asset/logo1507104171.gif" alt="Hội ghép tạng Việt Nam"></a></div>
+            <div class="header-menu">
+                <nav aria-label="Menu chính">
+                    <div class="nav-item"><a class="nav-link" href="index.html">Hội nghị 2026 <i class="fa-solid fa-chevron-down"></i></a>
+                        <div class="submenu">
+                            <a href="thong-bao-1.html">Thông báo số 1</a>
+                            <a href="thong-bao-2.html">Thông báo số 2</a>
+                            <a href="thu-moi-tai-tro.html">Thư mời tài trợ VSOT</a>
+                            <a href="chuong-trinh.html">Chương trình khoa học</a>
+                            <a href="chuong-trinh-dao-tao.html">Chương trình đào tạo</a>
+                            <a href="dang-ky-tham-du.html">Đăng ký tham dự</a>
+                        </div>
+                    </div>
+                    <div class="nav-item"><a class="nav-link" href="chuyen-de.html">Chuyên đề <i class="fa-solid fa-chevron-down"></i></a>
+                        <div class="submenu"><a href="ghep-than-tuy.html">Ghép thận, tụy</a><a href="ghep-gan.html">Ghép gan</a><a href="ghep-tim.html">Ghép tim</a><a href="ghep-phoi.html">Ghép phổi</a><a href="ghep-ruot.html">Ghép ruột</a><a href="ghep-da-tang.html">Ghép đa tạng</a></div>
+                    </div>
+                    <div class="nav-item"><a class="nav-link" href="tai-lieu.html">Tài liệu <i class="fa-solid fa-chevron-down"></i></a>
+                        <div class="submenu"><a href="tai-lieu-tham-khao.html">Tài liệu tham khảo</a><a href="tom-tat-bao-cao.html">Tóm tắt báo cáo khoa học</a><a href="huong-dan-ghep-than.html">Hướng dẫn ghép thận Việt Nam</a></div>
+                    </div>
+                    <div class="nav-item"><a class="nav-link" href="tin-tuc.html">Tin tức</a></div>
+                    <div class="nav-item"><a class="nav-link" href="hoi-vien.html">Hội viên</a></div>
+                    <div class="nav-item"><a class="nav-link" href="lien-he.html">Liên hệ</a></div>
+                </nav>
+            </div>
+            <div class="header-button"><a class="base-button base-button--primary" href="lien-he.html">Liên hệ</a></div>
+            <div class="header-select select-language"><a href="https://vsot.com.vn/TRAN-NGOC-SINH-PHAM-GIA-KHANH-The-Perspectives-on-Kidney-Transplantation-in-Viet-Nam.pdf" title="English version"><img src="asset/lacoen.gif" alt="English"></a></div>
+            <div class="hamburger-menu"><button type="button" onclick="document.querySelector('.mobile-nav').classList.toggle('open')" aria-label="Mở menu"><i class="fa-solid fa-bars"></i></button></div>
+        </div>
+        <div class="inner-container mobile-nav"><a href="index.html">Trang chủ</a><a href="index.html">Hội nghị 2026</a><a href="chuong-trinh.html">Chương trình khoa học</a><a href="chuyen-de.html">Chuyên đề</a><a href="tai-lieu.html">Tài liệu</a><a href="tin-tuc.html">Tin tức</a><a href="hoi-vien.html">Hội viên</a><a href="lien-he.html">Liên hệ</a></div>
+    </div>
+
+    <div class="full-containter prog-intro">
+        <div class="inner-container">
+            <h1>CHƯƠNG TRÌNH KHOA HỌC</h1>
+            <h2 style="margin-top:1rem;color:var(--color-gray-500);font-weight:600;">Hội nghị khoa học thường niên lần XI — TP. Đà Nẵng, 13–17/10/2026</h2>
+            <p>Lịch trình đầy đủ theo ngày và hội trường. Nhấn vào một phiên để xem chủ tọa và danh sách báo cáo.</p>
+            <div class="map-cta">
+                <button type="button" id="vsotHallProgOpen" class="base-button base-button--primary map-cta__btn">
+                    <i class="fa-solid fa-file-pdf" aria-hidden="true"></i> Chương trình theo hội trường (PDF)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="full-containter section">
+        <div class="inner-container">
+            <div class="programme" id="programme-app">
+                <div class="prog-toolbar">
+                    <div class="prog-days" id="prog-days" role="tablist" aria-label="Chọn ngày"></div>
+                    <div class="prog-viewtoggle" id="prog-view" role="group" aria-label="Kiểu hiển thị">
+                        <button type="button" data-view="timeline" class="is-active">Timeline</button>
+                        <button type="button" data-view="list">Danh sách</button>
+                    </div>
+                </div>
+
+                <div class="prog-filters">
+                    <div class="prog-filter-group">
+                        <span>Hội trường</span>
+                        <div class="prog-chips" id="prog-rooms"></div>
+                    </div>
+                    <div class="prog-filter-group">
+                        <span>Loại phiên</span>
+                        <div class="prog-chips" id="prog-types"></div>
+                    </div>
+                    <div class="prog-filter-group">
+                        <span>&nbsp;</span>
+                        <button type="button" class="prog-chip" id="prog-clear">Xoá bộ lọc</button>
+                    </div>
+                    <div class="prog-search-wrap">
+                        <input type="search" id="prog-search" placeholder="Tìm phiên, báo cáo, diễn giả, chủ tọa…" aria-label="Tìm kiếm chương trình">
+                    </div>
+                </div>
+
+                <div class="prog-stage" id="prog-stage" aria-live="polite"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="prog-modal" id="prog-modal" role="dialog" aria-modal="true" aria-label="Chi tiết phiên">
+        <div class="prog-modal__dialog" id="prog-modal-dialog"></div>
+    </div>
+
+    <footer class="full-containter footer">
+        <div class="inner-container">
+            <section class="footer__navigation">
+                <nav class="footer-list"><h5>Về VSOT</h5><ul><li><a href="">Giới thiệu VSOT</a></li><li><a href="">Ban chấp hành</a></li><li><a href="hoi-vien.html">Hội viên</a></li><li><a href="">Quỹ từ thiện</a></li></ul></nav>
+                <nav class="footer-list"><h5>Dịch vụ</h5><ul><li><a href="">Điều phối hiến tạng</a></li><li><a href="dang-ky-tham-du.html">Đăng ký hội nghị</a></li><li><a href="">Gửi abstract</a></li><li><a href="">Vinh danh</a></li></ul></nav>
+                <nav class="footer-list"><h5>Truyền thông</h5><ul><li><a href="">Tin tức ghép tạng Việt Nam</a></li><li><a href="">Tin tức ghép tạng quốc tế</a></li><li><a href="">Hội nghị trong nước</a></li><li><a href="">Hội nghị quốc tế</a></li></ul></nav>
+                <nav class="footer-list"><h5>Liên hệ</h5><ul><li>201B Nguyễn Chí Thanh, Q.5, TP.HCM</li><li>Điện thoại: (+84) 8 38 554 138</li><li>Di động: +84 983 723 493</li><li>Email: vsot@outlook.com.vn</li></ul></nav>
+            </section>
+            <section class="footer__socials socials"><a class="socials__social" href="" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a class="socials__social" href="" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a><a class="socials__social" href="" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></section>
+            <section class="footer__sub-footer"><img class="footer-logo" src="asset/logo1507104171.gif" alt="VSOT"><div class="footer__legal"><a href="">Chính sách bảo mật</a><a href="">Miễn trừ trách nhiệm</a></div></section>
+        </div>
+    </footer>
+
+    <div class="map-viewer" id="vsotHallProgViewer" role="dialog" aria-modal="true" aria-label="Chương trình chi tiết theo hội trường">
+        <div class="map-viewer__bar">
+            <span class="map-viewer__title">Chương trình chi tiết theo hội trường</span>
+            <span class="map-viewer__hint">Nhấn X ở góc trên bên phải để đóng</span>
+            <a class="map-viewer__open" href="materials/chuong-trinh-theo-hoi-truong.pdf" target="_blank" rel="noopener">Mở trong tab mới</a>
+            <button type="button" class="map-viewer__close" id="vsotHallProgClose" aria-label="Đóng chương trình"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <div class="map-viewer__body">
+            <iframe id="vsotHallProgFrame" data-src="materials/chuong-trinh-theo-hoi-truong.pdf" title="Chương trình chi tiết theo hội trường"></iframe>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var viewer = document.getElementById('vsotHallProgViewer');
+            var openBtn = document.getElementById('vsotHallProgOpen');
+            var closeBtn = document.getElementById('vsotHallProgClose');
+            var frame = document.getElementById('vsotHallProgFrame');
+            if (!viewer || !openBtn) return;
+            function openPdf() {
+                if (viewer.classList.contains('open')) return;
+                if (frame && !frame.getAttribute('src')) frame.setAttribute('src', frame.getAttribute('data-src'));
+                viewer.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                if (closeBtn) closeBtn.focus();
+            }
+            function closePdf() {
+                viewer.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+            openBtn.addEventListener('click', openPdf);
+            if (closeBtn) closeBtn.addEventListener('click', closePdf);
+            viewer.addEventListener('click', function (e) { if (e.target === viewer) closePdf(); });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && viewer.classList.contains('open')) closePdf();
+            });
+        })();
+    </script>
+
+    <script src="data/programme.js"></script>
+    <script src="js/programme.js"></script>
+</body>
+</html>

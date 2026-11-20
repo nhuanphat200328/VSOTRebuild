@@ -89,6 +89,9 @@ Sau khi thành công:
 - `/admin/news`, `/admin/news/categories` (News CMS)
 - `/admin/media`, `/admin/users`
 - `/vi/tin-tuc`, `/vi/tin-tuc/[slug]`
+- `/vi/hoi-nghi/cac-nam-truoc` (archive)
+- `/legacy/2026/index.html` (website hội nghị 2026 bảo toàn)
+- `/` redirect tới website 2026
 - `/api/health`, `/api/bootstrap-super-admin`
 
 ## Trạng thái

@@ -7,9 +7,12 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname === "/") {
-    const url = request.nextUrl.clone();
-    url.pathname = "/vi";
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(
+      new URL(
+        process.env.VSOT_LEGACY_2026_URL ?? "/legacy/2026/index.html",
+        request.url,
+      ),
+    );
   }
 
   const isAdmin = pathname.startsWith("/admin");

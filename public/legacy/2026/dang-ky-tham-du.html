@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký tham dự - Hội nghị VSOT 2026</title>
+    <meta name="description" content="Đăng ký tham dự Hội nghị khoa học thường niên lần XI Hội ghép tạng Việt Nam 2026 tại TP Đà Nẵng">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700&family=Roboto:wght@400;700&display=swap&subset=vietnamese" rel="stylesheet">
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+        .dky-guide { margin-bottom: 2rem; }
+        .dky-lead { color: var(--color-gray-500); margin: .25rem 0 1rem; }
+        .dky-card { background: var(--color-secondary-light); border-radius: var(--radius-md); padding: 1.5rem; margin: 1rem 0; }
+        .dky-card__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .5rem; }
+        .dky-card__head h3 { margin: 0; color: var(--color-darkest); }
+        .dky-fee { font-size: 1.3rem; font-weight: 700; color: var(--color-primary-dark); white-space: nowrap; }
+        .dky-note { color: var(--color-gray-500); margin: .25rem 0 .9rem; font-size: .95rem; }
+        .dky-info { margin: 0; display: grid; gap: .45rem; }
+        .dky-info > div { display: grid; grid-template-columns: minmax(9rem, auto) 1fr; gap: .75rem; }
+        .dky-info dt { font-weight: 700; color: var(--color-darkest); }
+        .dky-info dd { margin: 0; overflow-wrap: anywhere; }
+        .dky-email { margin-top: 1.25rem; font-weight: 600; }
+        .dky-email a { color: var(--color-primary); overflow-wrap: anywhere; }
+        .dky-qr { margin-top: 2.5rem; }
+        .dky-qr h2 { text-align: center; }
+        .dky-qr-item { display: flex; gap: 1.5rem; align-items: flex-start; background: var(--color-gray-100); border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); padding: 1.25rem; margin: 1rem 0; }
+        .dky-qr-text { flex: 1 1 auto; min-width: 0; }
+        .dky-qr-text h3 { margin: .1rem 0 .5rem; color: var(--color-darkest); }
+        .dky-qr-text p { margin: .35rem 0; }
+        .dky-link a { color: var(--color-primary); font-weight: 600; overflow-wrap: anywhere; word-break: break-all; }
+        .dky-qr-img { flex: none; margin: 0; text-align: center; }
+        .dky-qr-img img { width: 200px; height: 200px; background: #fff; padding: .5rem; border-radius: var(--radius-sm); border: 1px solid var(--color-gray-200); }
+        @media (max-width: 640px) {
+            .dky-card { padding: 1rem; }
+            .dky-info > div { grid-template-columns: 1fr; gap: 0; }
+            .dky-info dd { margin: 0 0 .5rem; }
+            .dky-qr-item { flex-direction: column; align-items: center; }
+            .dky-qr-img img { width: min(70vw, 220px); height: auto; }
+        }
+    </style>
+    <link rel="icon" href="asset/logo1507104171.gif" type="image/gif">
+    <script src="https://kit.fontawesome.com/622a6a0f09.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="full-containter full-header">
+        <div class="inner-container inner-header">
+            <div class="header-logo"><a class="logo" href="index.html"><img src="asset/logo1507104171.gif" alt="Hội ghép tạng Việt Nam"></a></div>
+            <div class="header-menu">
+                <nav aria-label="Menu chính">
+                    <div class="nav-item"><a class="nav-link" href="index.html">Hội nghị 2026 <i class="fa-solid fa-chevron-down"></i></a>
+                        <div class="submenu"><a href="thong-bao-1.html">Thông báo số 1</a><a href="thong-bao-2.html">Thông báo số 2</a><a href="thu-moi-tai-tro.html">Thư mời tài trợ VSOT</a><a href="chuong-trinh.html">Chương trình khoa học</a><a href="chuong-trinh-dao-tao.html">Chương trình đào tạo</a><a href="dang-ky-tham-du.html">Đăng ký tham dự</a></div>
+                    </div>
+                    <div class="nav-item"><a class="nav-link" href="chuyen-de.html">Chuyên đề <i class="fa-solid fa-chevron-down"></i></a>
+                        <div class="submenu"><a href="ghep-than-tuy.html">Ghép thận, tụy</a><a href="ghep-gan.html">Ghép gan</a><a href="ghep-tim.html">Ghép tim</a><a href="ghep-phoi.html">Ghép phổi</a><a href="ghep-ruot.html">Ghép ruột</a><a href="ghep-da-tang.html">Ghép đa tạng</a></div>
+                    </div>
+                    <div class="nav-item"><a class="nav-link" href="tai-lieu.html">Tài liệu <i class="fa-solid fa-chevron-down"></i></a>
+                        <div class="submenu"><a href="tai-lieu-tham-khao.html">Tài liệu tham khảo</a><a href="tom-tat-bao-cao.html">Tóm tắt báo cáo khoa học</a><a href="huong-dan-ghep-than.html">Hướng dẫn ghép thận Việt Nam</a></div>
+                    </div>
+                    <div class="nav-item"><a class="nav-link" href="tin-tuc.html">Tin tức</a></div>
+                    <div class="nav-item"><a class="nav-link" href="hoi-vien.html">Hội viên</a></div>
+                    <div class="nav-item"><a class="nav-link" href="lien-he.html">Liên hệ</a></div>
+                </nav>
+            </div>
+            <div class="header-button"><a class="base-button base-button--primary" href="lien-he.html">Liên hệ</a></div>
+            <div class="header-select select-language"><a href="https://vsot.com.vn/TRAN-NGOC-SINH-PHAM-GIA-KHANH-The-Perspectives-on-Kidney-Transplantation-in-Viet-Nam.pdf" title="English version"><img src="asset/lacoen.gif" alt="English"></a></div>
+            <div class="hamburger-menu"><button type="button" onclick="document.querySelector('.mobile-nav').classList.toggle('open')" aria-label="Mở menu"><i class="fa-solid fa-bars"></i></button></div>
+        </div>
+        <div class="inner-container mobile-nav"><a href="index.html">Trang chủ</a><a href="index.html">Hội nghị 2026</a><a href="chuyen-de.html">Chuyên đề</a><a href="tai-lieu.html">Tài liệu</a><a href="tin-tuc.html">Tin tức</a><a href="hoi-vien.html">Hội viên</a><a href="lien-he.html">Liên hệ</a></div>
+    </div>
+
+    <div class="full-containter title-welcome">
+        <div class="inner-container"><h1>ĐĂNG KÝ THAM DỰ</h1><h2>Hội nghị khoa học thường niên lần XI - VSOT 2026</h2></div>
+    </div>
+
+    <div class="full-containter section">
+        <div class="inner-container">
+            <div style="max-width:700px;margin:0 auto;">
+                <div class="dky-guide">
+                    <h2>Hướng dẫn hội nghị</h2>
+                    <p class="dky-lead">Quý Đồng nghiệp tham dự hội nghị vui lòng chuyển khoản về tài khoản hội theo thông tin bên dưới.</p>
+
+                    <section class="dky-card">
+                        <div class="dky-card__head">
+                            <h3>Phí tham dự hội nghị</h3>
+                            <span class="dky-fee">1.000.000 VND/người</span>
+                        </div>
+                        <p class="dky-note">(Một triệu đồng chẵn)</p>
+                        <dl class="dky-info">
+                            <div><dt>Tên tài khoản</dt><dd>HOI GHEP TANG VIET NAM</dd></div>
+                            <div><dt>Số tài khoản</dt><dd>101214851030070</dd></div>
+                            <div><dt>Ngân hàng</dt><dd>Eximbank</dd></div>
+                            <div><dt>Nội dung chuyển khoản</dt><dd>HOTEN+SDT+VSOT2026</dd></div>
+                            <div><dt>Ví dụ</dt><dd>Nguyen Van A 0123456789 VSOT2026</dd></div>
+                        </dl>
+                    </section>
+
+                    <section class="dky-card">
+                        <div class="dky-card__head">
+                            <h3>Phí cấp CME</h3>
+                            <span class="dky-fee">460.000 VND/người</span>
+                        </div>
+                        <p class="dky-note">Tương đương 6 giờ tín chỉ. Bệnh viện Đà Nẵng cấp theo yêu cầu cá nhân.</p>
+                        <dl class="dky-info">
+                            <div><dt>Tên tài khoản</dt><dd>BENH VIEN DA NANG</dd></div>
+                            <div><dt>Số tài khoản</dt><dd>5610396513</dd></div>
+                            <div><dt>Ngân hàng</dt><dd>BIDV — Ngân hàng Thương mại Cổ phần Đầu tư và Phát triển Việt Nam</dd></div>
+                            <div><dt>Nội dung chuyển khoản</dt><dd>HOTEN+SDT+CMEVSOT2026</dd></div>
+                            <div><dt>Ví dụ</dt><dd>Nguyen Van A 0123456789 CMEVSOT2026</dd></div>
+                        </dl>
+                    </section>
+
+                    <p class="dky-email">Email xác nhận đăng ký tham dự: <a href="mailto:hoinghivsot2026@gmail.com">hoinghivsot2026@gmail.com</a></p>
+                </div>
+
+                <h2>Cách thức đăng ký</h2>
+                <ol style="line-height:2;padding-left:1.5rem;">
+                    <li>Điền form đăng ký online tại link dưới</li>
+                    <li>Chuyển khoản phí tham dự (nội dung: <strong>HOTEN+SDT+VSOT2026</strong>); nếu đăng ký cấp CME, chuyển thêm phí cấp CME (nội dung: <strong>HOTEN+SDT+CMEVSOT2026</strong>)</li>
+                    <li>Gửi biên lai qua email: <a href="mailto:hoinghivsot2026@gmail.com">hoinghivsot2026@gmail.com</a></li>
+                    <li>Nhận email xác nhận + mã QR check-in</li>
+                </ol>
+
+                <section class="dky-qr">
+                    <h2>Phương thức đăng ký tham dự hội nghị và gửi báo cáo khoa học</h2>
+
+                    <div class="dky-qr-item">
+                        <div class="dky-qr-text">
+                            <h3>Đăng ký tham dự hội nghị</h3>
+                            <p><strong>Đăng ký tham dự Hội nghị trước ngày 31/08/2026 theo đường dẫn sau:</strong></p>
+                            <p class="dky-link"><a href="https://forms.gle/4evQ2sbCFZByeC7w8" target="_blank" rel="noopener">https://forms.gle/4evQ2sbCFZByeC7w8</a></p>
+                        </div>
+                        <figure class="dky-qr-img">
+                            <img src="asset/qr-dangky.png" alt="Mã QR đăng ký tham dự hội nghị" width="200" height="200">
+                        </figure>
+                    </div>
+
+                    <div class="dky-qr-item">
+                        <div class="dky-qr-text">
+                            <h3>Đăng ký báo cáo khoa học và đăng tạp chí</h3>
+                            <p><strong>Đăng ký báo cáo khoa học và đăng tạp chí: Gửi Abstract trước ngày 31/07/2026 theo đường dẫn sau:</strong></p>
+                            <p class="dky-link"><a href="https://forms.gle/kDrEsbYDNYXvTjo16" target="_blank" rel="noopener">https://forms.gle/kDrEsbYDNYXvTjo16</a></p>
+                        </div>
+                        <figure class="dky-qr-img">
+                            <img src="asset/qr-abstract.png" alt="Mã QR gửi Abstract và đăng tạp chí" width="200" height="200">
+                        </figure>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="full-containter footer">
+        <div class="inner-container">
+            <section class="footer__navigation">
+                <nav class="footer-list"><h5>Về VSOT</h5><ul><li><a href="">Giới thiệu VSOT</a></li><li><a href="">Ban chấp hành</a></li><li><a href="">Hội viên</a></li><li><a href="">Quỹ từ thiện</a></li></ul></nav>
+                <nav class="footer-list"><h5>Dịch vụ</h5><ul><li><a href="">Điều phối hiến tạng</a></li><li><a href="index.html">Đăng ký hội nghị</a></li><li><a href="">Gửi abstract</a></li><li><a href="">Vinh danh</a></li></ul></nav>
+                <nav class="footer-list"><h5>Truyền thông</h5><ul><li><a href="">Tin tức ghép tạng Việt Nam</a></li><li><a href="">Tin tức ghép tạng quốc tế</a></li><li><a href="">Hội nghị trong nước</a></li><li><a href="">Hội nghị quốc tế</a></li></ul></nav>
+                <nav class="footer-list"><h5>Liên hệ</h5><ul><li>201B Nguyễn Chí Thanh, Q.5, TP.HCM</li><li>Điện thoại: (+84) 8 38 554 138</li><li>Di động: +84 983 723 493</li><li>Email: vsot@outlook.com.vn</li></ul></nav>
+            </section>
+            <section class="footer__socials socials"><a class="socials__social" href="" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a class="socials__social" href="" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a><a class="socials__social" href="" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></section>
+            <section class="footer__sub-footer"><img class="footer-logo" src="asset/logo1507104171.gif" alt="VSOT"><div class="footer__legal"><a href="">Chính sách bảo mật</a><a href="">Miễn trừ trách nhiệm</a></div></section>
+        </div>
+    </footer>
+</body>
+</html>

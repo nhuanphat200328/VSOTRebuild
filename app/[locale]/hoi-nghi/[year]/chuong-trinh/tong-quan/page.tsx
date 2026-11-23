@@ -48,7 +48,7 @@ export default async function AtAGlancePage({
                 <h2 className="mb-3 text-lg font-extrabold text-brand-900">
                   {formatDate(date.date, locale)}
                 </h2>
-                <ProgrammeTable sessions={sessions} rooms={data.rooms} locale={locale} />
+                <ProgrammeTable sessions={sessions} rooms={data.rooms} locale={locale} year={year} />
               </section>
             );
           })}

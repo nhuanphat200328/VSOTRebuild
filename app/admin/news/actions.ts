@@ -91,7 +91,7 @@ export async function createNewsAction(formData: FormData) {
   const parsed = parseNews(formData);
   if (!parsed.success) redirect("/admin/news/new?error=invalid");
   if (
-    (parsed.data.status === "published" || parsed.data.vi_status === "published") &&
+    (parsed.data.status === "published" || parsed.data.vi_status === "published" || parsed.data.en_status === "published") &&
     !access.permissions.has("news.publish")
   ) {
     redirect("/admin/news/new?error=publish");
@@ -125,7 +125,7 @@ export async function updateNewsAction(formData: FormData) {
   const parsed = parseNews(formData);
   if (!id || !parsed.success) redirect(`/admin/news/${id}?error=invalid`);
   if (
-    (parsed.data.status === "published" || parsed.data.vi_status === "published") &&
+    (parsed.data.status === "published" || parsed.data.vi_status === "published" || parsed.data.en_status === "published") &&
     !access.permissions.has("news.publish")
   ) {
     redirect(`/admin/news/${id}?error=publish`);
@@ -164,14 +164,15 @@ export async function deleteNewsAction(formData: FormData) {
 }
 
 export async function createCategoryAction(formData: FormData) {
-  await requirePermission("news.write", "/admin/news/categories");
+  const { access } = await requirePermission("news.write", "/admin/news/categories");
+  const canPublish = access.permissions.has("news.publish");
   const name = String(formData.get("name") ?? "").trim();
   const slug = slugify(String(formData.get("slug") ?? "") || name);
   if (!name || !slug) redirect("/admin/news/categories?error=invalid");
   const admin = createSupabaseAdminClient();
   const { data: created, error } = await admin
     .from("news_categories")
-    .insert({ slug, status: "published", sort: 0 })
+    .insert({ slug, status: canPublish ? "published" : "draft", sort: 0 })
     .select("id")
     .single();
   if (error || !created) redirect("/admin/news/categories?error=server");
@@ -179,7 +180,7 @@ export async function createCategoryAction(formData: FormData) {
     category_id: created.id,
     locale: "vi",
     name,
-    status: "published",
+    status: canPublish ? "published" : "draft",
   });
   revalidatePath("/", "layout");
   redirect("/admin/news/categories?saved=1");

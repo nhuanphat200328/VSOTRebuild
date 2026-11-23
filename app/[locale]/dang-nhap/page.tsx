@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/container";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { isLocale, type Locale } from "@/lib/i18n/config";
 import { loginAction } from "./actions";
+import { safeNextPath } from "@/lib/auth/next-path";
 
 export default async function LoginPage({
   params,
@@ -17,7 +18,7 @@ export default async function LoginPage({
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale as Locale;
   const sp = await searchParams;
-  const next = typeof sp.next === "string" && sp.next.startsWith("/") ? sp.next : "/admin";
+  const next = safeNextPath(sp.next);
   const error = typeof sp.error === "string" ? sp.error : null;
 
   const supabase = await createSupabaseServerClient();

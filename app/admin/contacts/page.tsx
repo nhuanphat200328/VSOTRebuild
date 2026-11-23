@@ -33,7 +33,7 @@ export default async function AdminContactsPage({
 
   const sp = await searchParams;
   const status = typeof sp.status === "string" ? sp.status : "";
-  const q = (typeof sp.q === "string" ? sp.q : "").trim();
+  const q = (typeof sp.q === "string" ? sp.q : "").replace(/[%_\\"(),.]/g, " ").replace(/\s+/g, " ").trim().slice(0, 100);
 
   const admin = createSupabaseAdminClient();
   let query = admin

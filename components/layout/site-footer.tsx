@@ -41,17 +41,17 @@ export function SiteFooter({
           </h2>
           <ul className="mt-4 grid gap-2 text-sm">
             <li>
-              <Link className="hover:text-white" href={`/${locale}#gioi-thieu`}>
+              <Link className="hover:text-white" href="/legacy/2026/gioi-thieu.html">
                 {dict.nav.about}
               </Link>
             </li>
             <li>
-              <Link className="hover:text-white" href={`/${locale}#hoi-nghi`}>
+              <Link className="hover:text-white" href="/legacy/2026/index.html">
                 {dict.nav.conference}
               </Link>
             </li>
             <li>
-              <Link className="hover:text-white" href={`/${locale}/hoi-nghi/cac-nam-truoc`}>
+              <Link className="hover:text-white" href="/hoi-nghi/cac-nam-truoc">
                 {locale === "en" ? "Previous Conferences" : "Hội nghị các năm trước"}
               </Link>
             </li>

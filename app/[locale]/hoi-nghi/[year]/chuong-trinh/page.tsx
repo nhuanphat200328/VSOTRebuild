@@ -151,6 +151,7 @@ export default async function ProgrammePage({
           rooms={data.rooms}
           types={data.types}
           locale={locale}
+          year={year}
           view={view}
           date={selectedDate}
           initialQuery={one(sp.q) ?? ""}

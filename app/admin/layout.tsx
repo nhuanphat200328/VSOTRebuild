@@ -27,7 +27,7 @@ export default async function AdminLayout({
           <p className="mt-2 text-sm text-ink-500">
             Tài khoản này chưa được gán vai trò quản trị.
           </p>
-          <Link href="/vi" className="mt-5 inline-block text-sm font-bold text-brand-700 hover:underline">
+          <Link href="/legacy/2026/index.html" className="mt-5 inline-block text-sm font-bold text-brand-700 hover:underline">
             Về trang chủ
           </Link>
         </div>
@@ -50,7 +50,7 @@ export default async function AdminLayout({
             <span className="rounded-full bg-brand-50 px-2 py-1 font-bold text-brand-700">
               {roles.join(", ")}
             </span>
-            <Link href="/vi" className="font-semibold text-ink-700 hover:text-brand-700">
+            <Link href="/legacy/2026/index.html" className="font-semibold text-ink-700 hover:text-brand-700">
               Website
             </Link>
           </div>

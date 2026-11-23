@@ -4,6 +4,7 @@ import { ArrowLeft, CalendarDays, MapPin, Users } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { RoleBadge, roleLabel } from "@/components/programme/role-badge";
 import {
+  getConferenceByYear,
   getSessionById,
   presentationTitle,
   sessionTitle,
@@ -20,8 +21,11 @@ export default async function SessionPage({
   const { locale: rawLocale, year, id } = await params;
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale as Locale;
-  const session = await getSessionById(id);
-  if (!session) notFound();
+  const [session, conference] = await Promise.all([
+    getSessionById(id),
+    getConferenceByYear(year),
+  ]);
+  if (!session || !conference || session.conference_id !== conference.id) notFound();
 
   const chairs = session.session_people.filter((p) =>
     ["chair", "co_chair", "discussant", "moderator"].includes(p.role),

@@ -15,6 +15,7 @@ export function ProgrammeResults({
   rooms,
   types,
   locale,
+  year,
   view,
   date,
   initialQuery = "",
@@ -25,6 +26,7 @@ export function ProgrammeResults({
   rooms: { id: string; name_vi: string; name_en: string | null }[];
   types: { id: string; code: string; name_vi: string | null; name_en: string | null }[];
   locale: Locale;
+  year: string;
   view: "list" | "grid" | "table";
   date: string;
   initialQuery?: string;
@@ -160,18 +162,18 @@ export function ProgrammeResults({
               {formatDate(date, locale)}
             </h2>
             <div className="mt-3">
-              <ProgrammeList sessions={filtered} locale={locale} />
+              <ProgrammeList sessions={filtered} locale={locale} year={year} />
             </div>
           </section>
         ) : view === "grid" ? (
-          <ProgrammeGrid sessions={filtered} locale={locale} />
+          <ProgrammeGrid sessions={filtered} locale={locale} year={year} />
         ) : (
           <>
             <h2 className="mb-3 flex items-center gap-2 text-xl font-extrabold text-brand-900">
               <MapPin className="size-5 text-brand-500" aria-hidden />
               {formatDate(date, locale)}
             </h2>
-            <ProgrammeTable sessions={filtered} rooms={rooms} locale={locale} />
+            <ProgrammeTable sessions={filtered} rooms={rooms} locale={locale} year={year} />
           </>
         )}
       </div>

@@ -13,16 +13,18 @@ import {
 function PersonLine({
   person,
   locale,
+  year,
 }: {
   person: SessionPerson;
   locale: Locale;
+  year: string;
 }) {
   if (!person.people) return null;
   return (
     <span className="inline-flex items-center gap-1.5">
       <RoleBadge role={person.role} locale={locale} />
       <Link
-        href={`/${locale}/hoi-nghi/2026/dien-gia/${person.people.slug}`}
+        href={`/${locale}/hoi-nghi/${year}/dien-gia/${person.people.slug}`}
         className="text-sm text-brand-700 hover:underline"
       >
         {person.people.display_name || person.people.full_name}
@@ -34,9 +36,11 @@ function PersonLine({
 export function ProgrammeList({
   sessions,
   locale,
+  year,
 }: {
   sessions: ProgrammeSession[];
   locale: Locale;
+  year: string;
 }) {
   return (
     <div className="overflow-hidden rounded-xl border border-line bg-white">
@@ -80,7 +84,7 @@ export function ProgrammeList({
             <div className="border-t border-line bg-surface/60 px-3.5 py-4 sm:px-4">
               <div className="flex flex-wrap items-center gap-2">
                 <Link
-                  href={`/${locale}/hoi-nghi/2026/phien/${session.id}`}
+                  href={`/${locale}/hoi-nghi/${year}/phien/${session.id}`}
                   className="inline-flex items-center gap-1 rounded-md bg-brand-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-brand-700"
                 >
                   {locale === "en" ? "Session details" : "Chi tiết phiên"}
@@ -94,7 +98,7 @@ export function ProgrammeList({
                   </p>
                   <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1.5">
                     {chairs.map((person) => (
-                      <PersonLine key={`${person.role}-${person.people?.id}`} person={person} locale={locale} />
+                      <PersonLine key={`${person.role}-${person.people?.id}`} person={person} locale={locale} year={year} />
                     ))}
                   </div>
                 </div>
@@ -120,7 +124,7 @@ export function ProgrammeList({
                                   person.people ? (
                                     <Link
                                       key={person.people.id}
-                                      href={`/${locale}/hoi-nghi/2026/dien-gia/${person.people.slug}`}
+                                      href={`/${locale}/hoi-nghi/${year}/dien-gia/${person.people.slug}`}
                                       className="text-xs text-ink-500 hover:text-brand-700"
                                     >
                                       {person.people.display_name || person.people.full_name}

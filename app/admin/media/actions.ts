@@ -5,13 +5,12 @@ import { redirect } from "next/navigation";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { requirePermission } from "@/lib/auth/require";
 
-const MAX_BYTES = 5 * 1024 * 1024;
+const MAX_BYTES = 3.5 * 1024 * 1024;
 const ALLOWED = new Set([
   "image/jpeg",
   "image/png",
   "image/webp",
   "image/gif",
-  "image/svg+xml",
   "application/pdf",
 ]);
 
@@ -20,7 +19,7 @@ function safeName(name: string) {
 }
 
 export async function uploadMediaAction(formData: FormData) {
-  await requirePermission("media.upload", "/admin/media");
+  const { user } = await requirePermission("media.upload", "/admin/media");
   const file = formData.get("file");
   if (!(file instanceof File) || file.size === 0) redirect("/admin/media?error=file");
   if (file.size > MAX_BYTES) redirect("/admin/media?error=size");
@@ -43,6 +42,7 @@ export async function uploadMediaAction(formData: FormData) {
     alt_vi: String(formData.get("alt_vi") ?? "") || null,
     alt_en: String(formData.get("alt_en") ?? "") || null,
     visibility: "public",
+    uploaded_by: user.id,
   });
   if (error) {
     await admin.storage.from("media-public").remove([path]);

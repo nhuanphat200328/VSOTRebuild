@@ -6,10 +6,12 @@ export function ProgrammeTable({
   sessions,
   rooms,
   locale,
+  year,
 }: {
   sessions: ProgrammeSession[];
   rooms: { id: string; name_vi: string; name_en: string | null }[];
   locale: Locale;
+  year: string;
 }) {
   const times = [...new Set(sessions.map((session) => session.start_time))].sort();
   const cell = (time: string, roomId: string) =>
@@ -51,7 +53,7 @@ export function ProgrammeTable({
                     {items.map((session) => (
                       <Link
                         key={session.id}
-                        href={`/${locale}/hoi-nghi/2026/phien/${session.id}`}
+                        href={`/${locale}/hoi-nghi/${year}/phien/${session.id}`}
                         className="mb-1 block rounded border border-line border-l-4 border-l-brand-500 bg-white p-2 text-[11px] leading-snug transition hover:bg-brand-50"
                       >
                         <span className="block text-[9px] font-extrabold uppercase tracking-wide text-ink-500">

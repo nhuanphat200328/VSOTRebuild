@@ -33,6 +33,7 @@ export type Presentation = {
 
 export type ProgrammeSession = {
   id: string;
+  conference_id?: string;
   start_time: string;
   end_time: string;
   program_number: string | null;

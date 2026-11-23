@@ -29,11 +29,20 @@ const schema = z.object({
   en_status: translationStatus,
 });
 
+const RESERVED_SLUGS = new Set([
+  "tin-tuc", "hoi-nghi", "lien-he", "dang-nhap", "admin", "api",
+  "legacy", "archive", "hoi-vien", "tai-lieu", "chuyen-de",
+]);
+
 function slugify(value: string) {
   return normalizeSearch(value)
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 120);
+}
+
+function validateSlug(slug: string) {
+  return Boolean(slug) && !RESERVED_SLUGS.has(slug);
 }
 
 function parse(formData: FormData) {
@@ -106,7 +115,7 @@ export async function createPageAction(formData: FormData) {
   }
 
   const slug = slugify(parsed.data.slug || parsed.data.vi_title);
-  if (!slug) redirect("/admin/pages/new?error=slug");
+  if (!validateSlug(slug)) redirect("/admin/pages/new?error=slug");
 
   const admin = createSupabaseAdminClient();
   const { data: created, error } = await admin
@@ -140,9 +149,14 @@ export async function updatePageAction(formData: FormData) {
   }
 
   const slug = slugify(parsed.data.slug || parsed.data.vi_title);
-  if (!slug) redirect(pageUrl(id, "?error=slug"));
+  if (!validateSlug(slug)) redirect(pageUrl(id, "?error=slug"));
 
   const admin = createSupabaseAdminClient();
+  const { data: existing } = await admin
+    .from("pages")
+    .select("published_at")
+    .eq("id", id)
+    .maybeSingle();
   const { error } = await admin
     .from("pages")
     .update({
@@ -151,7 +165,9 @@ export async function updatePageAction(formData: FormData) {
       status: parsed.data.status,
       sort: parsed.data.sort,
       published_at:
-        parsed.data.status === "published" ? new Date().toISOString() : null,
+        parsed.data.status === "published"
+          ? existing?.published_at ?? new Date().toISOString()
+          : null,
     })
     .eq("id", id);
   if (error) {
@@ -171,7 +187,11 @@ export async function deletePageAction(formData: FormData) {
   const admin = createSupabaseAdminClient();
   const { error } = await admin
     .from("pages")
-    .update({ deleted_at: new Date().toISOString(), status: "archived" })
+    .update({
+      deleted_at: new Date().toISOString(),
+      status: "archived",
+      slug: `deleted-${id}`,
+    })
     .eq("id", id);
   if (error) redirect(pageUrl(id, "?error=server"));
   revalidatePath("/", "layout");

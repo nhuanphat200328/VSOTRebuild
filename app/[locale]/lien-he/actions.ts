@@ -4,6 +4,8 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { isIP } from "node:net";
 
 const schema = z.object({
   full_name: z.string().trim().min(2).max(200),
@@ -37,7 +39,19 @@ export async function submitContact(formData: FormData) {
 
   const requestHeaders = await headers();
   const forwarded = requestHeaders.get("x-forwarded-for") ?? "";
-  const ip = forwarded.split(",")[0]?.trim() || null;
+  const candidate = forwarded.split(",")[0]?.trim() || "";
+  const ip = candidate && isIP(candidate) ? candidate : null;
+
+  if (ip) {
+    const admin = createSupabaseAdminClient();
+    const since = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+    const { count } = await admin
+      .from("contact_requests")
+      .select("id", { count: "exact", head: true })
+      .eq("ip", ip)
+      .gte("created_at", since);
+    if ((count ?? 0) >= 5) redirect(`/${locale}/lien-he?error=rate`);
+  }
 
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.from("contact_requests").insert({

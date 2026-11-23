@@ -41,9 +41,7 @@ export default async function AdminDashboardPage() {
         <h2 className="text-sm font-bold text-ink-900">Trạng thái hệ thống</h2>
         <ul className="mt-3 grid gap-2 text-sm text-ink-700">
           <li>Supabase: đã kết nối (PostgreSQL 17).</li>
-          <li>Migration: 12 bản ghi trong <code>supabase_migrations</code>.</li>
           <li>Dữ liệu 2026: đã import từ nguồn legacy.</li>
-          <li>CMS module tiếp theo: Pages, News, Programme Builder.</li>
         </ul>
       </div>
     </div>

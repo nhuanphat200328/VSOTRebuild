@@ -202,7 +202,7 @@ async function saveTranslations(
 }
 
 export async function createPresentationAction(formData: FormData) {
-  await requirePermission("programme.write", "/admin");
+  const { access } = await requirePermission("programme.write", "/admin");
   const sessionId = String(formData.get("session_id") ?? "");
   const conferenceId = String(formData.get("conference_id") ?? "");
   const parsed = presentationSchema.safeParse({
@@ -216,6 +216,9 @@ export async function createPresentationAction(formData: FormData) {
   });
   if (!parsed.success) {
     redirect(editUrl(conferenceId, sessionId, "?error=presentation"));
+  }
+  if (parsed.data.status === "published" && !access.permissions.has("programme.publish")) {
+    redirect(editUrl(conferenceId, sessionId, "?error=publish"));
   }
 
   const admin = createSupabaseAdminClient();
@@ -239,7 +242,7 @@ export async function createPresentationAction(formData: FormData) {
 }
 
 export async function updatePresentationAction(formData: FormData) {
-  await requirePermission("programme.write", "/admin");
+  const { access } = await requirePermission("programme.write", "/admin");
   const presentationId = String(formData.get("presentation_id") ?? "");
   const sessionId = String(formData.get("session_id") ?? "");
   const conferenceId = String(formData.get("conference_id") ?? "");
@@ -254,6 +257,9 @@ export async function updatePresentationAction(formData: FormData) {
   });
   if (!parsed.success || !presentationId) {
     redirect(editUrl(conferenceId, sessionId, "?error=presentation"));
+  }
+  if (parsed.data.status === "published" && !access.permissions.has("programme.publish")) {
+    redirect(editUrl(conferenceId, sessionId, "?error=publish"));
   }
 
   const admin = createSupabaseAdminClient();

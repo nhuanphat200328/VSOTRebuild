@@ -5,9 +5,11 @@ import { sessionTitle, typeName, type ProgrammeSession } from "@/lib/programme/m
 export function ProgrammeGrid({
   sessions,
   locale,
+  year,
 }: {
   sessions: ProgrammeSession[];
   locale: Locale;
+  year: string;
 }) {
   const groups = new Map<string, ProgrammeSession[]>();
   for (const session of sessions) {
@@ -30,7 +32,7 @@ export function ProgrammeGrid({
               return (
                 <Link
                   key={session.id}
-                  href={`/${locale}/hoi-nghi/2026/phien/${session.id}`}
+                  href={`/${locale}/hoi-nghi/${year}/phien/${session.id}`}
                   className="flex min-h-36 flex-col rounded-lg border border-line border-l-4 border-l-brand-500 bg-white p-3.5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
                 >
                   <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-wide text-ink-500">
